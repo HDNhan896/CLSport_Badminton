@@ -1,0 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+.filter-box {
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 10px;
+}

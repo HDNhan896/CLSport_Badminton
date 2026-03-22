@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/layout.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/product_list.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <title>Products</title>
+</head>
+<body>
+    <header id="header"></header>
+    <div class="container-fluid my-3">
+        <section class="container-fluid">
+            <div class="row px-3 g-3">
+                <div class="col-3 filter-box">
+                    <div class="row">
+                        <div class="mb-3">
+                            <div class="fw-bold mb-4">
+                                Chọn mức giá
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="price1">
+                                <label class="form-check-label" for="price1">
+                                    Giá dưới 500.00 Đ
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="price2">
+                                <label class="form-check-label" for="price2">
+                                    500.00 Đ đến 1 Triệu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="price3">
+                                <label class="form-check-label" for="price3">
+                                    1-2 triệu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="price4">
+                                <label class="form-check-label" for="price4">
+                                    2-3 triệu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="price5">
+                                <label class="form-check-label" for="price5">
+                                    Trên 3 triệu
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="fw-bold mb-4">
+                                Chiều dài vợt
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ful-long1">
+                                <label class="form-check-label" for="ful-long1">
+                                    665 mm
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ful-long2">
+                                <label class="form-check-label" for="ful-long2">
+                                    670 mm
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ful-long3">
+                                <label class="form-check-label" for="ful-long3">
+                                    675 mm
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="fw-bold mb-4">
+                                Chiều dài cán vợt
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="hand-long1">
+                                <label class="form-check-label" for="hand-long1">
+                                    200 mm
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="hand-long2">
+                                <label class="form-check-label" for="hand-long2">
+                                    205 mm 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="hand-long3">
+                                <label class="form-check-label" for="hand-long3">
+                                    210 mm
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="row g-3">
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/duora_1.jpg" alt="">
+                        </div>
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/arcsaber.jpg" alt="">
+                        </div>
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/astrox_1.png" alt="">
+                        </div>
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/nanoflare.png" alt="">
+                        </div>
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/nanoray_1.jpg" alt="">
+                        </div>
+                        <div class="col-4 border-0 rounded-0">
+                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/voltric.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="row bg-body-secondary mx-2 my-3 rounded">
+                        <div class="col-6">
+                            <h3>Shop cầu lông web</h3>
+                        </div>
+                        <div class="col-6 text-end">
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Xắp xếp theo giá
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">Giá tăng đần</a></li>
+                                  <li><a class="dropdown-item" href="#">Giá giảm dần</a></li>
+                                  <li><a class="dropdown-item" href="#">Hàng mới nhất</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-1 d-flex justify-content-around">
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite_1755830512.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="#" title="Vợt cầu lông Yonex Voltric Lite chính hãng">Vợt cầu lông Yonex Voltric Lite chính hãng</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">1.369.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-lite-40i_1773878480.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-lite-40i.html" title="Vợt cầu lông Yonex Voltric Lite 40i">Vợt cầu lông Yonex Voltric Lite 40i</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">689.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite-35i-chinh-hang_1695752798.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-lite-35i-chinh-hang.html" title="Vợt cầu lông Yonex Voltric Lite 35i chính hãng">Vợt cầu lông Yonex Voltric Lite 35i chính hãng</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">689.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite-47i-chinh-hang_1695758442.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-lite-47i-chinh-hang.html" title="Vợt cầu lông Yonex Voltric Lite 47i chính hãng">Vợt cầu lông Yonex Voltric Lite 47i chính hãng</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">689.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-50-e-tune_1740711223.jpg" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-50-e-tune.html" title="Vợt Cầu Lông Yonex Voltric 50 E-tune">Vợt Cầu Lông Yonex Voltric 50 E-tune</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">1.890.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-ld-9_1740708125.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-ld-9.html" title="Vợt Cầu Lông Yonex Voltric LD 9">Vợt Cầu Lông Yonex Voltric LD 9</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">1.290.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-5_1740705455.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-5.html" title="Vợt cầu lông Yonex Voltric 5">Vợt cầu lông Yonex Voltric 5</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">1.090.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-3 border-0">
+                            <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-7-dg_1740705599.webp" alt="">
+                            <div class="card-body ps-0">
+                                <div class="product-name">
+                                    <a class="text-decoration-none text-black" href="vot-cau-long-yonex-voltric-7-dg.html" title="Vợt cầu lông Yonex Voltric 7 DG">Vợt cầu lông Yonex Voltric 7 DG</a>
+                                </div>
+                                <div class="product-price">
+                                    <span class="text-danger">1.090.000 ₫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul class="list-unstyled d-flex justify-content-end">
+                                <li class="rounded-2 py-1 px-2 mx-2" style="border: 1px solid orangered;"><a style="color: orangered;" class="text-decoration-none" href="#">1</a></li>
+                                <li class="rounded-2 py-1 px-2 mx-2" style="border: 1px solid orangered;"><a style="color: orangered;" class="text-decoration-none" href="#">2</a></li>
+                                <li class="rounded-2 py-1 px-2 mx-2" style="border: 1px solid orangered;"><a style="color: orangered;" class="text-decoration-none" href="#">3</a></li>
+                                <li class="rounded-2 py-1 px-2 mx-2" style="border: 1px solid orangered;"><a style="color: orangered;" class="text-decoration-none" href="#">4</a></li>
+                                <li class="rounded-2 py-1 px-2 mx-2" style="border: 1px solid orangered;"><a style="color: orangered;" class="text-decoration-none" href="#">5</a></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p>Vợt cầu lông Yonex luôn là lựa chọn của các tay vợt chuyên nghiệp, cũng như nhiều bạn yêu thích cầu lông Việt Nam. Vậy để mua vợt cầu lông Yonex chính hãng ở đâu tốt nhất? Bộ <a class="text-decoration-none" href="#"><span style="color: orangered;">vợt cầu lông</span></a> xịn nào thích hợp cho mình? Hãy tham khảo bài viết về vợt Yonex sau để trả lời câu hỏi cho mình nhé</p>
+                            <h4>Hình thành và phát triển của hãng vợt cầu lông Yonex</h4>
+                            <p>Hãng vợt Yonex ra đời năm 1946 tại Nhật, xuất thân chỉ từ xưởng nhỏ. Ban đầu, hoạt động với một máy duy nhất. Sau khi sản xuất thành công công nghệ làm gỗ, hãng đã cho ra đời cây <a class="text-decoration-none" href="#"><span style="color: orangered;">vợt cầu lông Yonex</span></a> đầu tiên vào năm 1957. Đến nay, vợt Yonex đã trở thành hãng bán vợt cầu lông hàng đầu thế giới.</p><br>
+                            <p>Không dừng lại, hãng vợt cầu lông Yonex tiếp tục cho ra những sản phẩm bộ cầu lông xịn để phục vụ môn cầu lông. Như <a class="text-decoration-none" href="#"><span style="color: orangered;">giày cầu lông</span></a> Yonex với chất lượng cực cao, quần áo Yonex với thiết kế thời trang, những phụ kiện, quấn cán Yonex cũng là những lựa chọn tối ưu nhất.</p><br>
+                            <p>Hiện nay, ở thị trường Yonex Việt Nam rất nhiều bạn mua vợt Yonex tìm đến những bộ cầu lông xịn phù hợp với mình. Như thiên về sức mạnh thì có <a class="text-decoration-none" href="#"><span style="color: orangered;">Vợt cầu lông Yonex Voltric</span></a> 7. Chuyên về đánh nhanh, phản tạt mạnh mẽ với Yonex NanoSpeed 9900. Yonex Voltric 70 và Yonex Voltric 80 thiết kế đầu nặng dành cho tấn công. Trong khi đó, Yonex Duora 10 là dòng vợt kiểm soát cầu, công thủ toàn diện. Yonex ArcSaber 11 thiên về điều cầu và kiểm soát trận đấu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer id="footer" class="site-footer"></footer>
+</body>
+</html>
