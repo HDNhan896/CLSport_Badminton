@@ -18,6 +18,12 @@
 .product-overview  img{
     border: 1px solid wheat;
 }
+.product-description-more a{
+    border: 1px solid black;
+    text-decoration: underline;
+    text-align: center;
+    padding: 10px 20px;
+}
 .privilege{
     border: 1px dashed red;
 }
