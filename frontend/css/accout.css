@@ -1,0 +1,43 @@
+:root {
+    --primary-orange: #f26522;
+}
+
+.login-page {
+    background-image: radial-gradient(circle, rgba(242, 101, 34, 0.05) 0%, rgba(255, 255, 255, 1) 70%);
+}
+
+.text-orange { color: var(--primary-orange) !important; }
+
+.btn-orange-vnb {
+    background-color: var(--primary-orange);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.btn-orange-vnb:hover {
+    background-color: #d4551a;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.hover-orange:hover {
+    color: var(--primary-orange) !important;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 0.2rem rgba(242, 101, 34, 0.1);
+}
+

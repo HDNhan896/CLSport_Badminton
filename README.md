@@ -24,7 +24,6 @@ Người dùng có thể:
 
 * Áp dụng kiến thức về **HTML, CSS, JavaScript**
 * Xây dựng **Backend bằng Node.js và Express**
-* Thiết kế và quản lý **Database (postgreSQL)**
 * Sử dụng **Bootstrap để xây dựng giao diện responsive**
 * Thực hành **làm việc nhóm bằng Git và GitHub**
 * Hoàn thành một **website bán hàng cơ bản**
@@ -46,10 +45,6 @@ Mục tiêu của dự án là xây dựng một hệ thống **hoạt động �
 
 * **Node.js** – môi trường chạy JavaScript phía server
 * **Express.js** – framework xây dựng API
-
-### 🗄 Database
-
-* **postgreSQL** – quản lý dữ liệu sản phẩm và người dùng
 
 ### 🔧 Công cụ phát triển
 
@@ -104,17 +99,30 @@ badminton-shop/
 
 frontend/
 │
+├── about.html
+├── account.html
+├── checkout.html
+├── forgot-password.html
 ├── index.html
-├── product.html
-├── cart.html
+├── signup.html
+│
+├── pages/
+│   ├── cart.html
+│   └── product.html
+│
+├── components/
+│   ├── footer.html
+│   └── header.html
 │
 ├── css/
 │   └── style.css
 │
 ├── js/
 │   ├── api.js
-│   ├── product.js
-│   └── cart.js
+│   ├── card.js
+│   ├── layout.js
+│   ├── main.js
+│   └── product.js
 │
 └── assets/
     └── images/
@@ -153,14 +161,18 @@ git clone <repository-link>
 ```
 
 ### 2️⃣ Cài đặt thư viện
-
-```id="u04lv1"
+cd vào backend
+```
+cd backend
+```
+sau đó
+```
 npm install
 ```
 
 ### 3️⃣ Chạy server
 
-```id="o9w7rt"
+```
 node backend/server.js
 ```
 
@@ -168,7 +180,7 @@ node backend/server.js
 
 Truy cập trình duyệt tại địa chỉ:
 
-```id="u71i1p"
+```
 http://localhost:3000
 ```
 
