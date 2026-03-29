@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const headerPlaceholder = document.getElementById('header');
-        fetch('./components/header.html')
+        fetch('/frontend/components/header.html')
            .then(response => response.text())
             .then(data => {
                 headerPlaceholder.innerHTML = data;
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const footerPlaceholder = document.getElementById('footer');
-        fetch('./components/footer.html')
+        fetch('/frontend/components/footer.html')
            .then(response => response.text())
             .then(data => {
                 footerPlaceholder.innerHTML = data;
