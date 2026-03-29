@@ -36,19 +36,23 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <input type="text" class="form-control py-2" placeholder="Họ và tên" required>
+                            <input type="text" name="username" class="form-control py-2" placeholder="Họ và tên"
+                                required>
                         </div>
                         <div class="col-md-6">
-                            <input type="email" class="form-control py-2" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control py-2" placeholder="Email" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <input type="tel" class="form-control py-2" placeholder="Điện thoại" required>
+                        <input type="tel" name="phone" id="txtsdt" class="form-control py-2" placeholder="Điện thoại"
+                            onblur="telcheck()" required>
+                        <span id="err2" class="fst-italic mt-1 d-block" style="font-size: 14px;"></span>
                     </div>
 
                     <div class="mb-4">
-                        <textarea class="form-control py-2" rows="6" placeholder="Nội dung" required></textarea>
+                        <textarea name="content" class="form-control py-2" rows="6" placeholder="Nội dung"
+                            required></textarea>
                     </div>
 
                     <button type="submit" class="btn text-white px-4 py-2"
@@ -63,6 +67,21 @@
     </main>
     <footer id="footer" class="site-footer"></footer>
 
+    <script>
+        function telcheck() {
+            var dt = /^0[3-9]{1}[\d]{8}$/;
+            var sdt = document.getElementById("txtsdt").value;
+            if (dt.test(sdt)) {
+                document.getElementById("err2").innerHTML = "Số điện thoại hợp lệ!";
+                document.getElementById("err2").style.color = "green";
+                return true;
+            } else {
+                document.getElementById("err2").innerHTML = "* Số điện thoại không hợp lệ! ";
+                document.getElementById("err2").style.color = "red";
+                return false;
+            }
+        }
+    </script>
 </body>
 
 </html>
