@@ -181,7 +181,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .section_slider .swiper-button-next,
     .section_slider .swiper-button-prev {
         width: 34px;
@@ -247,16 +246,13 @@ body {
     .policy-box {
         padding: 10px;
     }
-
     .policy-icon {
         font-size: 24px;
         margin-right: 10px;
     }
-
     .policy-title {
         font-size: 11px;
     }
-
     .policy-desc {
         font-size: 10px;
     }
@@ -422,7 +418,6 @@ body {
     overflow: hidden;
     border-radius: 8px;
 }
-
 .sale-banner-item img {
     width: 100%;
     height: auto;
@@ -430,7 +425,6 @@ body {
     object-fit: cover;
     aspect-ratio: 21/7;
 }
-
 .sale-banner-item:hover img {
     transform: scale(1.03);
 }
@@ -452,10 +446,7 @@ body {
 .category-banner-item::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background-image: radial-gradient(#fff 1px, transparent 1px);
     background-size: 15px 15px;
     opacity: 0.15;
@@ -471,7 +462,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
     transition: transform 0.4s ease;
 }
 
@@ -493,7 +484,7 @@ body {
     text-transform: uppercase;
     transform: translateY(-50%) rotate(-8deg);
     z-index: 2;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 @media (max-width: 768px) {
@@ -519,7 +510,7 @@ body {
 }
 
 .news-card:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transform: translateY(-3px);
 }
 
@@ -622,8 +613,7 @@ body {
     margin-bottom: 15px;
 }
 
-.footer-text strong,
-.footer-text b {
+.footer-text strong, .footer-text b {
     color: #ffffff;
 }
 
