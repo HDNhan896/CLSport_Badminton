@@ -24,7 +24,6 @@ Người dùng có thể:
 
 * Áp dụng kiến thức về **HTML, CSS, JavaScript**
 * Xây dựng **Backend bằng Node.js và Express**
-* Thiết kế và quản lý **Database (postgreSQL)**
 * Sử dụng **Bootstrap để xây dựng giao diện responsive**
 * Thực hành **làm việc nhóm bằng Git và GitHub**
 * Hoàn thành một **website bán hàng cơ bản**
@@ -46,10 +45,6 @@ Mục tiêu của dự án là xây dựng một hệ thống **hoạt động �
 
 * **Node.js** – môi trường chạy JavaScript phía server
 * **Express.js** – framework xây dựng API
-
-### 🗄 Database
-
-* **postgreSQL** – quản lý dữ liệu sản phẩm và người dùng
 
 ### 🔧 Công cụ phát triển
 

@@ -21,7 +21,7 @@ body {
 }
 
 .hotline-number {
-    color: #e3000f; 
+    color: #e3000f;
     font-size: 14px;
 }
 
@@ -211,7 +211,7 @@ body {
 }
 
 .policy-box:hover {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .policy-icon {
