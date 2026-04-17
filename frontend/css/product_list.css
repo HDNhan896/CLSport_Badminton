@@ -5,3 +5,13 @@
     border: 1px solid rgb(207, 207, 207);
     border-radius: 10px;
 }
+
+/* 1. Ép lớp nền đen xuống thấp hơn */
+.offcanvas-backdrop {
+    z-index: 1040 !important;
+}
+
+/* 2. Ép Offcanvas vọt lên trên lớp nền */
+.offcanvas {
+    z-index: 1070 !important; /* Cao hơn hẳn 1040 */
+}
