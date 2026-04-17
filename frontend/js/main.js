@@ -1,3 +1,7 @@
+import { PRODUCTS } from "./badmintonProducts.js";
+
+console.log("DATA:", PRODUCTS);
+
 var swiper = new Swiper(".mySwiper", {
     loop: true,
     autoplay: {
@@ -38,62 +42,50 @@ var productSwiper = new Swiper(".productSwiper", {
 });
 
 
-const productsData = {
-    'Vợt Cầu Lông': [
-
-    ],
-    'Giày Cầu Lông': [
-
-    ],
-    'Áo Cầu Lông': [
-
-    ],
-    'Váy cầu lông': [
-
-    ],
-    'Quần Cầu Lông': [
-
-    ],
-    'Túi Vợt Cầu Lông': [
-
-    ],
-    'Balo Cầu Lông': [
-
-    ]
-};
 
 document.addEventListener("DOMContentLoaded", function () {
+
     const tabLinks = document.querySelectorAll(".product-tabs-wrapper .tab-link");
 
+    // hàm render
+    function render(data) {
+        if (productSwiper && productSwiper.removeAllSlides) {
+            productSwiper.removeAllSlides();
+
+            const slidesHTML = data.slice(0, 10).map(item => `
+                <div class="swiper-slide">
+                    <a href="product-detail.html?id=${item.id}" class="product-card">
+                        <div class="product-img">
+                            <img src="${item.cover}" alt="${item.title}">
+                        </div>
+                        <div class="product-name">${item.title}</div>
+                        <div class="product-price">${item.price.toLocaleString()} đ</div>
+                    </a>
+                </div>
+            `);
+
+            productSwiper.appendSlide(slidesHTML.join(""));
+            productSwiper.slideTo(0);
+        }
+    }
+
+    // 👉 load mặc định
+    const defaultData = PRODUCTS.filter(p => p.category === "Vợt Cầu Lông");
+    render(defaultData);
+
+    // 👉 click tab
     tabLinks.forEach(function (tab) {
         tab.addEventListener("click", function (e) {
             e.preventDefault();
 
             tabLinks.forEach(t => t.classList.remove("active"));
-
             this.classList.add("active");
 
-            const tabName = this.innerText.trim();
-            const data = productsData[tabName] || productsData['Vợt Cầu Lông'];
+            const tabName = this.dataset.cat;
+            
+            const data = PRODUCTS.filter(p => p.category === tabName);
 
-            if (typeof productSwiper !== 'undefined') {
-                productSwiper.removeAllSlides();
-
-                const slidesHTML = data.map(item => `
-                    <div class="swiper-slide">
-                        <a href="${item.link}" class="product-card" title="${item.name}">
-                            <div class="product-img">
-                                <img src="${item.img}" alt="${item.name}">
-                            </div>
-                            <div class="product-name">${item.name}</div>
-                            <div class="product-price">${item.price}</div>
-                        </a>
-                    </div>
-                `);
-
-                productSwiper.appendSlide(slidesHTML);
-                productSwiper.slideTo(0);
-            }
+            render(data);
         });
     });
 });
