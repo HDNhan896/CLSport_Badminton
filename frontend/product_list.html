@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="./js/product.js"></script>
     <title>Products</title>
 </head>
 <body>
@@ -17,9 +19,9 @@
     <div class="container-fluid my-3">
         <section class="container-fluid">
             <div class="row px-3 g-3">
-                <div class="col-3 filter-box">
+                <div class="col-12 col-md-3 filter-box d-none d-md-block" id="Loc">
                     <div class="row">
-                        <div class="mb-3">
+                        <div class="mb-3 border-bottom ps-4">
                             <div class="fw-bold mb-4">
                                 Chọn mức giá
                             </div>
@@ -54,75 +56,80 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 border-bottom ps-4">
                             <div class="fw-bold mb-4">
-                                Chiều dài vợt
+                                Trọng lượng
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="ful-long1">
-                                <label class="form-check-label" for="ful-long1">
-                                    665 mm
+                                <input class="form-check-input" type="checkbox" id="weight1">
+                                <label class="form-check-label" for="weight1">
+                                    2U: 90-94g
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="ful-long2">
-                                <label class="form-check-label" for="ful-long2">
-                                    670 mm
+                                <input class="form-check-input" type="checkbox" id="weight2">
+                                <label class="form-check-label" for="weight2">
+                                    3U: 85-89g
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="ful-long3">
-                                <label class="form-check-label" for="ful-long3">
-                                    675 mm
+                                <input class="form-check-input" type="checkbox" id="weight3">
+                                <label class="form-check-label" for="weight3">
+                                    4U: 80-84g
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="weight4">
+                                <label class="form-check-label" for="weight4">
+                                    5U: 75-79g
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="weight1">
+                                <label class="form-check-label" for="weight1">
+                                    F: 70-74g
                                 </label>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 border-bottom ps-4">
                             <div class="fw-bold mb-4">
-                                Chiều dài cán vợt
+                                Điểm cân bằng
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="hand-long1">
-                                <label class="form-check-label" for="hand-long1">
-                                    200 mm
+                                <input class="form-check-input" type="checkbox" id="light-head">
+                                <label class="form-check-label" for="light-head">
+                                    Nhẹ đầu
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="hand-long2">
-                                <label class="form-check-label" for="hand-long2">
-                                    205 mm 
+                                <input class="form-check-input" type="checkbox" id="Balance">
+                                <label class="form-check-label" for="Balance">
+                                    Cân bằng
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="hand-long3">
-                                <label class="form-check-label" for="hand-long3">
-                                    210 mm
+                                <input class="form-check-input" type="checkbox" id="quite-heavy">
+                                <label class="form-check-label" for="quite-heavy">
+                                    Hơi nặng đầu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="Heavy">
+                                <label class="form-check-label" for="Heavy">
+                                    Nặng đầu
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="very-heavy">
+                                <label class="form-check-label" for="very-heavy">
+                                    Siêu nặng đầu
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-9">
-                    <div class="row g-3">
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/duora_1.jpg" alt="">
-                        </div>
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/arcsaber.jpg" alt="">
-                        </div>
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/astrox_1.png" alt="">
-                        </div>
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/nanoflare.png" alt="">
-                        </div>
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/nanoray_1.jpg" alt="">
-                        </div>
-                        <div class="col-4 border-0 rounded-0">
-                            <img style="border: 1px solid black;" class="img w-100 h-auto object-fit-cover" src="./IMG/voltric.jpg" alt="">
-                        </div>
-                    </div>
+                <div class="col-12 col-md-9">
+                    
                     <div class="row bg-body-secondary mx-2 my-3 rounded">
                         <div class="col-6">
                             <h3>Shop cầu lông web</h3>
@@ -141,7 +148,7 @@
                         </div>
                     </div>
                     <div class="row g-1 d-flex justify-content-around">
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite_1755830512.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -152,7 +159,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-lite-40i_1773878480.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -163,7 +170,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite-35i-chinh-hang_1695752798.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -174,7 +181,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/gallery/vot-cau-long-yonex-voltric-lite-47i-chinh-hang_1695758442.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -185,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-50-e-tune_1740711223.jpg" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -196,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-ld-9_1740708125.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -207,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-5_1740705455.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -218,7 +225,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card col-3 border-0">
+                        <div class="card col-6 col-md-3 border-0">
                             <img class="card-img-top" src="https://cdn.shopvnb.com/img/300x300/uploads/san_pham/vot-cau-long-yonex-voltric-7-dg_1740705599.webp" alt="">
                             <div class="card-body ps-0">
                                 <div class="product-name">
@@ -245,11 +252,33 @@
                             <p>Không dừng lại, hãng vợt cầu lông Yonex tiếp tục cho ra những sản phẩm bộ cầu lông xịn để phục vụ môn cầu lông. Như <a class="text-decoration-none" href="#"><span style="color: orangered;">giày cầu lông</span></a> Yonex với chất lượng cực cao, quần áo Yonex với thiết kế thời trang, những phụ kiện, quấn cán Yonex cũng là những lựa chọn tối ưu nhất.</p><br>
                             <p>Hiện nay, ở thị trường Yonex Việt Nam rất nhiều bạn mua vợt Yonex tìm đến những bộ cầu lông xịn phù hợp với mình. Như thiên về sức mạnh thì có <a class="text-decoration-none" href="#"><span style="color: orangered;">Vợt cầu lông Yonex Voltric</span></a> 7. Chuyên về đánh nhanh, phản tạt mạnh mẽ với Yonex NanoSpeed 9900. Yonex Voltric 70 và Yonex Voltric 80 thiết kế đầu nặng dành cho tấn công. Trong khi đó, Yonex Duora 10 là dòng vợt kiểm soát cầu, công thủ toàn diện. Yonex ArcSaber 11 thiên về điều cầu và kiểm soát trận đấu.</p>
                         </div>
-                    </div>
+                    </div>    
                 </div>
             </div>
         </section>
     </div>
+    
     <footer id="footer" class="site-footer"></footer>
+<div class="position-fixed top-50 end-0 d-block d-md-none z-3">
+        <button class="btn btn-danger shadow" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu">
+            <i class="bi bi-funnel"></i> Lọc
+        </button>
+    </div>
+
+<div class="offcanvas offcanvas-end" id="mobileMenu" tabindex="-1" aria-labelledby="mobileMenuLabel" style="z-index: 1050 !important;">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mobileMenuLabel">
+                <i class="bi bi-funnel"></i> Bộ Lọc Sản Phẩm
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body" id="Loc-offcanva">
+            </div>
+    </div>
+    <script>
+        const menuContent = document.getElementById('Loc').innerHTML;
+        document.getElementById('Loc-offcanva').innerHTML = menuContent;
+    </script>
 </body>
 </html>
