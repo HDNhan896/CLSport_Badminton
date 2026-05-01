@@ -1,6 +1,9 @@
 const container = document.getElementById("sanPham");
 const cards = Array.from(container.querySelectorAll('.card'));
 
+
+
+
 function giaTangDan(event) {
     // 1. Ngăn trang web load lại khi nhấn thẻ <a>
     if (event) event.preventDefault();
