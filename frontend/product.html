@@ -38,147 +38,150 @@
         </section>
 
         <section class="layout_product">
-            <div class="container">
-                <div class="row">
-                    <div class="product-details col-lg-9 col-col-md-9 col-sm-12 col-xs-12">
-                        <div class="row">
+            <div class="container w-100 mb-5">
+                <div class="row w-100 m-0">
+                    <div class="product-details col-lg-12 col-col-md-12 col-sm-12 col-xs-12">
+                        <div class="row shadow p-4">
                             <div class="col-md-5 product-image h-100">
                                 <div class="product-image-main">
                                     <a class="nav-link w-100" href="">
-                                        <img class="w-100" id="product-img-render" src=""
-                                            alt="vot-cau-long-yonex-astrox">
+                                        <img class="w-100 shadow" src="" alt="add-info">
                                     </a>
                                 </div>
                             </div>
 
                             <div class="product-info col-12 col-md-7 col-lg-7 h-100">
-                                <h1 class="fs-4" id="product-name-render">Vợt cầu lông Yonex Astrox Lite 45i</h1>
+                                <h1 class="fs-4">add-info</h1>
                                 <span>Mã:
-                                    <span class="text-danger" id="product-id-render">VCL-YNX-AL45I</span>
+                                    <span class="text-danger">add-info</span>
                                 </span>
                                 <div class="info">
                                     <span>Trạng thái:
                                         <span class="text-danger">Còn hàng</span>
                                     </span>
                                     <form action="">
+                                        <div class="pice-box">
+                                            <span class="fw-bold fs-4 text-danger">add-info</span>
+                                            <hr>
+                                        </div>
                                         <fieldset class="privilege d-block p-3 ">
                                             <legend class="float-none w-auto">Ưu đãi</legend>
                                             <div class="product-promotions">
                                                 <p>✔ Sản phẩm cam kết chính hãng</p>
                                                 <p>✔ Một số sản phẩm sẽ được tặng bao đơn hoặc bao nhung bảo vệ vợt</p>
                                                 <p>✔ Thanh toán sau khi kiểm tra và nhận hàng (Giao khung vợt)</p>
-                                                <p>✔ Bảo hành chính hãng theo nhà sản xuất (Trừ hàng nội địa, xách tay)</p>
-                                            </div>
-                                            <div class="select-quantity" style='color: red;'>
-                                                <i class="fa-solid fa-circle-minus"></i>
-                                                <input type='text' class='text-center text-danger'
-                                                    style="border: 1px solid red;" value='1'>
-                                                <i class="fa-solid fa-circle-plus"></i>
-                                            </div>
-                                            <div class="pay-product d-flex gap-2 mt-3">
-                                                <a href="/checkout" class="btn bg-warning text-light"><b>MUA
-                                                        NGAY</b></a>
-                                                <a href="/cart" class="btn bg-danger text-light"><b>THÊM VÀO GIỎ
-                                                        HÀNG</b></a>
+                                                <p>✔ Bảo hành chính hãng theo nhà sản xuất (Trừ hàng nội địa, xách tay)
+                                                </p>
                                             </div>
                                         </fieldset>
+                                        <div class="pay mt-3">
+                                            <div class="select-quantity d-flex gap-2" style='color: red;'>
+                                                <button type="button" class="btn btn-danger btn-circle" onclick="decreaseQuantity()">
+                                                    &minus;
+                                                </button>
+                                                <input type='text' class='text-center text-danger w-25'
+                                                    style="border: 1px solid red;" value='0' readonly>
+                                                <button type="button" class="btn btn-danger btn-circle" onclick="increaseQuantity()">
+                                                    &plus;
+                                                </button>
+                                            </div>
+                                            <div class="pay-product d-flex gap-2 mt-3">
+                                                <button class="btn bg-warning text-light w-100 p-3 fs-5">
+                                                    <b>MUA NGAY</b></button>
+                                                <button class="btn bg-danger text-light w-100 p-3 fs-5">
+                                                    <b><i class="fa-solid fa-shopping-cart"></i>THÊM VÀO GIỎ HÀNG</b></button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="row w-100 m-0 mt-4 p-3">
-                            <h4>Mô tả sản phẩm</h4>
-                            <div class="product-description">
-                                <h5>1. Giới thiệu Vợt cầu lông Yonex Astrox Lite 45i</h5>
-                                <p>- Vợt cầu lông Yonex Astrox Lite 45i chính hãng là lựa chọn lý tưởng dành cho người
-                                    mới bắt đầu hoặc đang trong giai đoạn làm quen với bộ môn cầu lông. Cây vợt sở hữu
-                                    thiết kế nhẹ, dễ thuần, kết hợp cùng đặc tính hơi nặng đầu giúp hỗ trợ người chơi
-                                    tạo ra những cú đánh có lực tốt hơn, đặc biệt phù hợp với lối chơi thiên về tấn công
-                                    từ cuối sân.
-                                <p>- Vợt cầu lông Astrox Lite 45i cho khả năng thực hiện các cú đập gõ, đập tỉa hai biên
-                                    khá hiệu quả, giúp người chơi dễ dàng gây áp lực và tạo lợi thế trong các pha cầu.
-                                    Bên cạnh đó, với trọng lượng 5U siêu nhẹ, vợt mang lại cảm giác cầm nắm thoải mái,
-                                    hạn chế mỏi tay, cho phép người chơi luyện tập hoặc thi đấu trong thời gian dài mà
-                                    không bị quá tải.</p>
-                                <p>- Thuộc phân khúc sơ cấp của Yonex, Astrox Lite 45i vẫn được trang bị những công nghệ
-                                    cơ bản nhưng rất thiết thực. Nổi bật là công nghệ ISOMETRIC giúp mở rộng vùng điểm
-                                    ngọt, tăng khả năng đánh trúng cầu chính xác ngay cả khi người chơi chưa có kỹ năng.
-                                </p>
-                            </div>
-                            <div class="product-description-more">
-                                <span id="text1" style="display: none;">
-                                    <p>- Tổng thể, vợt cầu lông Yonex Astrox Lite 45i là cây vợt dễ chơi, dễ làm quen,
-                                        hỗ trợ tốt cho người mới theo đuổi lối đánh tấn công nhưng vẫn đảm bảo khả năng
-                                        phòng thủ ở mức ổn định. Với mức giá dễ tiếp cận trong phân khúc dưới 1 triệu,
-                                        đây là một trong những lựa chọn “quốc dân” đáng cân nhắc cho người mới bắt đầu.
-                                    </p>
+                        <div class="row d-flex w-100 m-0 mt-4 p-3">
+                            <ul class="nav nav-pills w-100 d-flex text-center mb-0 p-0" id="productTab" role="tablist">
+                                <li class="nav-item w-50" role="presentation">
+                                    <button class="nav-link w-100 active rounded-0" id="details-tab"
+                                        data-bs-toggle="pill" data-bs-target="#details" type="button" role="tab"
+                                        aria-controls="details" aria-selected="true">
+                                        THÔNG TIN CHI TIẾT
+                                    </button>
+                                </li>
+                                <li class="nav-item w-50" role="presentation">
+                                    <button class="nav-link w-100  rounded-0" id="desc-tab" data-bs-toggle="pill"
+                                        data-bs-target="#desc" type="button" role="tab" aria-controls="desc"
+                                        aria-selected="false">
+                                        MÔ TẢ
+                                    </button>
+                                </li>
+                            </ul>
 
-                                    <h5>2. Thông số kĩ thuật của Vợt cầu lông Astrox Lite 45i</h5>
-                                    <p>- Thương hiệu: Yonex</p>
-                                    <p>- Khung vợt: HM Graphite</p>
-                                    <p>- Đũa vợt: HM Graphite</p>
-                                    <p>- Độ cứng vợt cầu lông Yonex Astrox Lite 45i: Dẻo</p>
-                                    <p>- Điểm cân bằng: Hơi nặng đầu</p>
-                                    <p>- Trọng lượng: 5U</p>
-                                    <p>- Cán cầm: G5</p>
-                                    <p>- Độ dài vợt: 675mm</p>
-                                    <p>- Mức căng: 9.0 - 13.5</p>
+                            <div class="tab-content border p-3" id="productTabContent">
 
-                                    <h5>3. Công nghệ trên Vợt cầu lông Astrox Lite 45i</h5>
-                                    <p>- NANOMESH NEO: Chất liệu carbon kết hợp nhựa giúp khung vợt bền và dẻo hơn, tăng
-                                        khả năng uốn và phục hồi nhanh, hỗ trợ truyền lực tốt cho những pha cầu liên
-                                        tục.</p>
-                                    <p>- ISOMETRIC: Thiết kế khung vuông giúp mở rộng điểm ngọt, tăng độ chính xác và ổn
-                                        định ngay cả khi đánh lệch tâm.</p>
-                                    <p>- AERO-BOX FRAME: Khung kết hợp giữa độ cứng và khí động học, giảm lực cản không
-                                        khí, giúp vung vợt nhanh và linh hoạt hơn.</p>
-                                    <p>- BUILT-IN T-JOINT: Gia cố khớp chữ T bằng vật liệu cứng, tăng độ ổn định, hạn
-                                        chế xoắn vợt và cải thiện cảm giác cầu.</p>
-                                    <p>- CONTROL SUPPORT CAP: Thiết kế mũ vợt tối ưu điểm tựa tay cầm, giúp cầm chắc
-                                        chắn hơn và nâng cao khả năng kiểm soát trong từng cú đánh.</p>
-
-                                    <h5>4. Vợt cầu lông Yonex Astrox Lite 45i phù hợp với người chơi nào?</h5>
-                                    <p>- Vợt cầu lông Yonex Astrox Lite 45i phù hợp với người chơi theo lối đánh công
-                                        thủ toàn diện, thiên nhẹ về tấn công. Vợt hỗ trợ tốt cho các pha đập cầu mạnh,
-                                        đồng thời vẫn đảm bảo khả năng điều cầu và phòng thủ ổn định nhờ trọng lượng nhẹ
-                                        và độ linh hoạt cao.</p>
-                                    <p>- Vợt cũng phù hợp với người có lực cổ tay chưa mạnh hoặc người mới bắt đầu. Với
-                                        thiết kế dễ chơi, dễ kiểm soát, vợt cầu lông Yonex Astrox Lite 45i là lựa chọn
-                                        lý tưởng cho học sinh, sinh viên và người chơi phong trào đang tìm kiếm một cây
-                                        vợt để tập luyện và nâng cao thể lực.</p>
-                                    <p>Trong trường hợp các bạn đang tìm kiếm một cây vợt cao cấp hơn, phù hợp với trình
-                                        độ và lối đánh của bản thân, hãy tham khảo những mẫu Vợt cầu lông khác tại
-                                        ShopVNB.</p>
-                                    <div class="text-center">
-                                        <a style="color: red; text-decoration: none; cursor: pointer;"
-                                            onclick="document.getElementById('text1').style.display='none'; document.getElementById('readMoreBtn').style.display='inline';">
-                                            Thu gọn
-                                        </a>
-                                    </div>
-                                </span>
-                                <div class="text-center">
-                                    <a id="readMoreBtn" style="color: red; text-decoration: none; cursor: pointer;"
-                                        onclick="document.getElementById('text1').style.display='inline'; this.style.display='none';">
-                                        Xem thêm
-                                    </a>
+                                <!-- Nội dung: Thông tin chi tiết -->
+                                <div class="tab-pane fade show active" id="details" role="tabpanel"
+                                    aria-labelledby="details-tab">
+                                    <h5>Thông Số Kỹ Thuật</h5>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                    </table>
                                 </div>
+
+                                <div class="tab-pane fade" id="desc" role="tabpanel" aria-labelledby="desc-tab">
+                                    <h5>Thông Số Kỹ Thuật</h5>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-4">add-info</th>
+                                            <td>add-info</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                
-                    </div>
-                 </div>                 
-             </div>
-         </section>
-     </div>
+
+                </div>
+            </div>
+    </div>
+    </section>
+    </div>
     <!-- Footer -->
-    <footer id="footer" class="site-footer">
-
-    </footer>
-
-    <script>
-
-    </script>
+    <footer id="footer" class="site-footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html>
+</html>cls
