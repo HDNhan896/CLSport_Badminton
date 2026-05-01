@@ -48,30 +48,49 @@ function giaGiamDan(event) {
 }
 
 function locTheoGia() {
-    const price2 = document.getElementById("price2");
-    let cardsLoc = [];
-
+    // Lấy tất cả các checkbox ĐANG ĐƯỢC CHỌN (có dấu tick)
+    const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
+    
+    // Hàm hỗ trợ lấy giá trị số từ chuỗi text của sản phẩm
     const getPriceValue = (card) => {
         const priceText = card.querySelector('.product-price span').innerText;
-        // Loại bỏ dấu chấm, khoảng trắng và chữ đ, sau đó chuyển sang số
         return parseInt(priceText.replace(/\./g, '').replace(/[^\d]/g, ''));
     };
 
-    for (let i=0; i<cards.length; i++) {
-        if (getPriceValue(cards[i]) < 1000000) {
-            cardsLoc.push(cards[i])
+    // Lặp qua toàn bộ sản phẩm
+    for (let i = 0; i < cards.length; i++) {
+        let card = cards[i];
+        let price = getPriceValue(card);
+        let isMatch = false; // Cờ kiểm tra xem sản phẩm có khớp điều kiện không
+
+        // Nếu không có checkbox nào được chọn -> Mặc định cho hiện tất cả
+        if (checkedBoxes.length === 0) {
+            card.style.display = 'block';
+            continue; 
+        }
+
+        // Lặp qua các checkbox đang được đánh dấu để xem giá sản phẩm có lọt vào khoảng nào không
+        checkedBoxes.forEach(box => {
+            // Tách value "500000-1000000" thành mảng ["500000", "1000000"]
+            let range = box.value.split('-'); 
+            let min = parseInt(range[0]);
+            let max = range[1] === 'max' ? Infinity : parseInt(range[1]);
+
+            // Nếu giá sản phẩm nằm trong khoảng của checkbox đang xét
+            if (price >= min && price <= max) {
+                isMatch = true; 
+            }
+        });
+
+        // Kết quả: Khớp thì hiện, không khớp thì ẩn
+        if (isMatch) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
         }
     }
-
-    if (price2.checked) {
-        container.innerHTML = ''; // Xóa danh sách cũ
-        cardsLoc.forEach(card => container.appendChild(card));
-    }
-    else {
-        container.innerHTML = ''; // Xóa danh sách cũ
-        cards.forEach(card => container.appendChild(card));
-    }
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuContent = document.getElementById('Loc').innerHTML;
