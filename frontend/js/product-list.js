@@ -1,3 +1,6 @@
+const container = document.getElementById("sanPham");
+const cards = Array.from(container.querySelectorAll('.card'));
+
 function giaTangDan(event) {
     // 1. Ngăn trang web load lại khi nhấn thẻ <a>
     if (event) event.preventDefault();
@@ -43,10 +46,9 @@ function giaGiamDan(event) {
     container.innerHTML = ''; // Xóa danh sách cũ
     cards.forEach(card => container.appendChild(card));
 }
-const container = document.getElementById("sanPham");
-const cards = Array.from(container.querySelectorAll('.card'));
+
 function locTheoGia() {
-    const price2 = document.getElementById("price2")
+    const price2 = document.getElementById("price2");
     let cardsLoc = [];
 
     const getPriceValue = (card) => {
@@ -68,7 +70,7 @@ function locTheoGia() {
     else {
         container.innerHTML = ''; // Xóa danh sách cũ
         cards.forEach(card => container.appendChild(card));
-    }   
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
