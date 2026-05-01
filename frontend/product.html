@@ -16,39 +16,40 @@
 
 <body>
     <!-- Header -->
-        <header id="header" class="header"></header>
+    <header id="header" class="header"></header>
 
-        
+
     <!-- Product -->
     <div class="bodywrap">
         <section class="bread_crumb mb-5">
             <div class="container-md">
                 <ul class="nav bread_crumb_list ">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="home.html"><span itemprop="name">Trang chủ</span> &nbsp; &gt;</a>
+                        <a class="nav-link text-dark" href="home.html"><span itemprop="name">Trang chủ</span> &nbsp;
+                            &gt;</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href=""><span>Vợt cầu lông</span> &nbsp; &gt;</a>
+                        <a id="product-category-active" class="nav-link text-dark" href=""></a>
                     </li>
                     <li class="nav-item">
-                        <div class="nav-link text-danger" id= href="#">add-info</div>
+                        <div class="nav-link text-danger" id=href="#">add-info</div>
                     </li>
                 </ul>
             </div>
         </section>
 
         <section class="layout_product">
-            <div class="container w-100 mb-5">
+            <div class="container w-100 mb-5 p-0">
                 <div class="row w-100 m-0">
-                    <div class="product-details col-lg-12 col-col-md-12 col-sm-12 col-xs-12">
-                        <div class="row shadow-lg mt-3 p-4 d-flex g-5 rounded-3">
+                    <div class="product-details col-lg-12 col-col-md-12 col-sm-12 col-xs-12 p-0">
+                        <div class="row border mt-3 pt-4 pb-4 d-flex g-5 rounded-3">
                             <div class="col-md-5 product-image d-flex align-items-center m-0">
                                 <div id="render-img-product" class="product-image-main ">
                                 </div>
                             </div>
 
-                            <div class="product-info col-12 col-md-7 col-lg-7 h-100 m-0">
-                                <h1 class="fs-4">add-info</h1>
+                            <div class="product-info col-12 col-md-7 col-lg-7 h-100 m-0 ">
+                                <h1 class="fs-1">add-info</h1>
                                 <span>Mã:
                                     <span class="text-danger">add-info</span>
                                 </span>
@@ -73,12 +74,14 @@
                                         </fieldset>
                                         <div class="pay mt-3">
                                             <div class="select-quantity d-flex gap-2" style='color: red;'>
-                                                <button type="button" class="btn btn-danger btn-circle" onclick="decreaseQuantity()">
+                                                <button type="button" class="btn btn-danger btn-circle"
+                                                    onclick="decreaseQuantity()">
                                                     &minus;
                                                 </button>
                                                 <input type='text' class='text-center text-danger w-25'
                                                     style="border: 1px solid red;" value='0' readonly>
-                                                <button type="button" class="btn btn-danger btn-circle" onclick="increaseQuantity()">
+                                                <button type="button" class="btn btn-danger btn-circle"
+                                                    onclick="increaseQuantity()">
                                                     &plus;
                                                 </button>
                                             </div>
@@ -86,14 +89,15 @@
                                                 <button class="btn bg-warning text-light w-100 p-3 fs-5">
                                                     <b>MUA NGAY</b></button>
                                                 <button class="btn bg-danger text-light w-100 p-3 fs-5">
-                                                    <b><i class="fa-solid fa-shopping-cart"></i>THÊM VÀO GIỎ HÀNG</b></button>
+                                                    <b><i class="fa-solid fa-shopping-cart"></i>THÊM VÀO GIỎ
+                                                        HÀNG</b></button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="row d-flex w-100 m-0 mt-4 p-3">
+                        <div class="row d-flex w-100 m-0 mt-4">
                             <ul class="nav nav-pills w-100 d-flex text-center mb-0 p-0" id="productTab" role="tablist">
                                 <li class="nav-item w-50" role="presentation">
                                     <button class="nav-link w-100 active rounded-0" id="details-tab"
@@ -144,16 +148,25 @@
                                 <div class="tab-pane fade" id="desc" role="tabpanel" aria-labelledby="desc-tab">
                                     add-info
                                 </div>
-
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
+        </section>
+
+        <div class="container mt-5 mb-5 row m-auto pt-4 rounded" style="background-color: #d95327;">
+            <h4 class="mb-4 fw-bold fs-2" style="color:white;">Sản Phẩm Liên Quan</h4>
+            <div class="w-100 gap-3" >
+                <div class="row" id="related-products-container">
+                    <!-- Sản phẩm liên quan sẽ được render vào đây -->
+                </div>
+            </div>
+        </div>
     </div>
-    </section>
     </div>
+
     <!-- Footer -->
     <footer id="footer" class="site-footer"></footer>
     <script src=""></script>
