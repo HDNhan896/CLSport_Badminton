@@ -31,12 +31,12 @@ function renderProductsByCategory(categoryName) {
         // Render HTML sản phẩm
         const htmlRender = filteredProducts.map(product => {
             return `
-            <div class="swiper-slide">
-                <a href="san-pham.html?id=${product.id}" class="product-card" title="${product.title}">
+            <div class="swiper-slide shadow rounded">
+                <a href="product.html?id=${product.id}" class="product-card" title="${product.title}">
                     <div class="product-img">
                         <img src="${product.cover}" alt="${product.title}">
                     </div>
-                    <div class="product-name">${product.title}</div>
+                    <div class="product-name text-truncate">${product.title}</div>
                     <div class="product-price">${formatPrice(product.price)}</div>
                 </a>
             </div>
