@@ -1,4 +1,6 @@
-// Product page scripts
+import { PRODUCTS } from "./badmintonProducts.js";
+
+// Product quantity
 function increaseQuantity() {
     const quantityInput = document.querySelector('.select-quantity input');
     let currentValue = parseInt(quantityInput.value);
@@ -13,7 +15,12 @@ function decreaseQuantity() {
     }
 }
 
-// Add event listeners to the buttons
-document.querySelector('.select-quantity .fa-circle-plus').addEventListener('click', increaseQuantity);
-document.querySelector('.select-quantity .fa-circle-minus').addEventListener('click', decreaseQuantity);
+//Render product
+function getProductId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
 
+function renderProduct() {
+
+}
