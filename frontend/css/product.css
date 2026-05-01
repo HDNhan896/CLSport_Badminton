@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.bread_crumb {
+    background-color: #F5F5F5;
+}
+
+.nav-link span {
+    transition: 0.5s;
+}
+
+.nav-link span:hover {
+    padding: 0 5px;
+    color: red;
+}
+
+.product-overview img:hover {
+    border: 1px solid red;
+}
+
+.product-overview img {
+    border: 1px solid wheat;
+}
+
+.product-description-more a {
+    border: 1px solid black;
+    text-decoration: underline;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.privilege {
+    border: 1px dashed red;
+}
+
+legend {
+    color: red;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: #d95327 !important;
+    color: white !important;
+}
+
+.nav-pills .nav-link {
+    color: #333;
+    background-color: rgb(224, 221, 221);
+    font-weight: bold;
+}
+
+.nav-pills .nav-link:not(.active):hover {
+    background-color: rgb(218, 215, 215) !important;
+    color: black !important;
+}
+.nav-pills .nav-link.active:hover {
+    background-color: #e56439 !important;
+    color: white !important;
+}
