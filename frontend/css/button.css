@@ -1,0 +1,35 @@
+/* Màu chữ và viền mặc định cho nút */
+.btn-add-cart {
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột vào NÚT BẤM */
+.btn-add-cart:hover {
+    background-color: #d95327 !important;
+    color: white !important;
+    border-color: #d95327 !important;
+}
+
+/* Hiệu ứng cho toàn bộ thẻ sản phẩm */
+.product-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(217, 83, 39, 0.15) !important; /* Đổ bóng nhẹ theo tông màu đỏ gạch */
+    border: 1px solid #d95327 !important;
+}
+
+/* Hiển thị nút giỏ hàng khi hover (Dành cho PC) */
+@media (min-width: 992px) {
+    .btn-cart-wrapper {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .product-card-hover:hover .btn-cart-wrapper {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}

@@ -34,13 +34,33 @@ function renderProduct() {
     if (breadcrumbActive) breadcrumbActive.innerText = product.title;
     if (breadcrumbCategoryActive) breadcrumbCategoryActive.innerHTML = `<span>${product.category}</span>&nbsp; &gt;`;
     
-    // 2. Render Ảnh sản phẩm
+    // 2. Render Ảnh sản phẩm kèm Badge (Mới, Bán chạy, Giảm giá)
     const imgContainer = document.getElementById('render-img-product');
     if (imgContainer) {
+        // Xử lý hiển thị phần trăm giảm giá
+        let discountBadge = '';
+        if (product.originalPrice && product.originalPrice > product.price) {
+            let discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+            discountBadge = `<span class="badge bg-warning text-dark position-absolute" style="top: 10px; right: 20px; z-index: 10;">-${discountPercent}%</span>`;
+        }
+
+        // Xử lý hiển thị nhãn Mới và Bán chạy
+        const newBadge = product.isNew ? `<span class="badge bg-success position-absolute" style="top: 10px; left: 20px; z-index: 10;">MỚI</span>` : '';
+        
+        // Căn chỉnh vị trí nhãn Bán chạy sang bên cạnh nếu đã có nhãn Mới
+        let bestSellerLeft = product.isNew ? "70px" : "20px";
+        const bestSellerBadge = product.isBestSeller ? `<span class="badge bg-danger position-absolute" style="top: 10px; left: ${bestSellerLeft}; z-index: 10;">BÁN CHẠY</span>` : '';
+
+        // Bọc thẻ img trong div có position-relative để gắn badge nổi lên trên
         imgContainer.innerHTML = `
-        <a class="nav-link w-100" href="">
-            <img class="w-100 shadow rounded-3" src="${product.cover}" alt="${product.title}">
-        </a>
+        <div class="position-relative">
+            ${newBadge}
+            ${bestSellerBadge}
+            ${discountBadge}
+            <a class="nav-link w-100" href="">
+                <img class="w-100 shadow rounded-3" src="${product.cover}" alt="${product.title}">
+            </a>
+        </div>
         `;
     }
 
@@ -48,12 +68,23 @@ function renderProduct() {
     document.querySelector('.product-info h1').innerText = product.title;
     document.querySelector('.product-info span .text-danger').innerText = product.id;
 
+    // Định dạng giá tiền
     const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price);
-    document.querySelector('.pice-box .text-danger').innerText = priceFormatted;
+    let priceHtml = `${priceFormatted}`;
+    
+    // Hiển thị thêm giá gốc gạch ngang nếu sản phẩm có giảm giá
+    if (product.originalPrice && product.originalPrice > product.price) {
+        const originalPriceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.originalPrice);
+        priceHtml += ` <span class="text-muted text-decoration-line-through fs-6 ms-2" style="font-weight: normal;">${originalPriceFormatted}</span>`;
+    }
+    
+    // Đổ giá vào giao diện
+    const priceElement = document.querySelector('.pice-box .text-danger');
+    if (priceElement) priceElement.innerHTML = priceHtml;
 
     // 4. Render Bảng Thông số kỹ thuật (Details & Desc)
     const detailTable = document.querySelector('#details table');
-    const descTable = document.querySelector('#desc table'); // Đã thêm khai báo biến này
+    const descTable = document.querySelector('#desc table'); 
 
     let specsHtml = "";
 
@@ -69,9 +100,6 @@ function renderProduct() {
                 </tr>`;
         }).join('');
     } 
-    // Các sản phẩm còn lại (Áo, Quần, Túi, Phụ kiện)
-    // ... (Phần if ở trên giữ nguyên) ...
-
     // Các sản phẩm còn lại (Áo, Quần, Túi, Phụ kiện) hiển thị theo form chung (Tiếng Anh)
     else {
         const priceFormattedTable = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price);
@@ -104,7 +132,7 @@ function renderProduct() {
     if (detailTable) detailTable.innerHTML = specsHtml;
     if (descTable) descTable.innerHTML = specsHtml;
 
-    // 5. GỌI HÀM RENDER SẢN PHẨM LIÊN QUAN TẠI ĐÂY
+    // 5. Render Sản Phẩm Liên Quan
     renderRelatedProducts(product);
 }
 
