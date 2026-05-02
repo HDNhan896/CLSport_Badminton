@@ -1,6 +1,7 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 .filter-box {
     border: 1px solid rgb(207, 207, 207);
     border-radius: 10px;
@@ -13,8 +14,10 @@
 
 /* 2. Ép Offcanvas vọt lên trên lớp nền */
 .offcanvas {
-    z-index: 1070 !important; /* Cao hơn hẳn 1040 */
+    z-index: 1070 !important;
+    /* Cao hơn hẳn 1040 */
 }
+
 /* ==========================================
    1. ANIMATION XUẤT HIỆN SẢN PHẨM (MORPH)
 ========================================== */
@@ -29,6 +32,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -39,7 +43,8 @@
    2. HIỆU ỨNG ZOOM ẢNH VÀ NỔI THẺ SẢN PHẨM
 ========================================== */
 .img-zoom-container {
-    overflow: hidden; /* Chặn ảnh tràn ra ngoài khung khi zoom */
+    overflow: hidden;
+    /* Chặn ảnh tràn ra ngoài khung khi zoom */
 }
 
 .product-card-hover {
@@ -47,19 +52,23 @@
 }
 
 .product-card-hover .card-img-top {
-    transition: transform 0.5s ease-in-out; /* Tốc độ zoom ảnh */
+    transition: transform 0.5s ease-in-out;
+    /* Tốc độ zoom ảnh */
 }
 
 /* Khi hover vào nguyên cái thẻ card */
 .product-card-hover:hover {
-    transform: translateY(-5px); /* Nhấc lên 5px */
-    box-shadow: 0 .5rem 1rem rgba(217, 83, 39, 0.15) !important; /* Đổ bóng màu đỏ gạch */
-    border: 1px solid #d95327 !important; /* Hiện viền đỏ gạch */
+    transform: translateY(-5px);
+    /* Nhấc lên 5px */
+    box-shadow: 0 .5rem 1rem rgba(217, 83, 39, 0.15) !important;
+    /* Đổ bóng màu đỏ gạch */
+    border: 1px solid #d95327 !important;
+    /* Hiện viền đỏ gạch */
 }
 
 /* Khi hover vào card thì ảnh bên trong phóng to 10% */
 .product-card-hover:hover .card-img-top {
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 /* ==========================================
@@ -81,14 +90,16 @@
     .btn-cart-wrapper {
         opacity: 0;
         visibility: hidden;
-        transform: translateY(10px); /* Tụt xuống một chút */
+        transform: translateY(10px);
+        /* Tụt xuống một chút */
         transition: all 0.3s ease;
     }
-    
+
     .product-card-hover:hover .btn-cart-wrapper {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0); /* Trượt lên đúng vị trí */
+        transform: translateY(0);
+        /* Trượt lên đúng vị trí */
     }
 }
 
@@ -111,8 +122,14 @@
         transform: translateX(-100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+.form-check-input:checked {
+    background-color: #d95327;
+    border-color: #d95327;
 }
