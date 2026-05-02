@@ -22,8 +22,9 @@ function renderAllProducts() {
         let bestSellerLeft = product.isNew ? "60px" : "10px";
         const bestSellerBadge = product.isBestSeller ? `<span class="badge position-absolute shadow-sm" style="top: 10px; left: ${bestSellerLeft}; z-index: 10; background-color: #d95327;">BÁN CHẠY</span>` : '';
 
+        // BƯỚC ĐÃ SỬA: Thêm class "current-price" vào thẻ chứa giá
         const priceHtml = `
-            <div class="fw-bold fs-6" style="color: #d95327;">
+            <div class="fw-bold fs-6 current-price" style="color: #d95327;">
                 ${formatPrice(product.price)}
             </div>`;
 
@@ -68,17 +69,12 @@ function reAnimateVisibleProducts() {
     let visibleIndex = 0;
 
     productCols.forEach(col => {
-        // Chỉ xử lý những phần tử đang được hiển thị (display không phải là 'none')
+        // Chỉ xử lý những phần tử đang được hiển thị
         if (col.style.display !== 'none') {
-            // Xóa class animation cũ
             col.classList.remove('product-slide-enter');
-            
-            // Ép trình duyệt tính toán lại (Force reflow) để animation có thể chạy lại
-            void col.offsetWidth;
-            
-            // Thêm lại class animation và tính lại delay dựa trên thứ tự hiển thị mới
+            void col.offsetWidth; // Force reflow
             col.classList.add('product-slide-enter');
-            col.style.animationDelay = `${visibleIndex * 0.02}s`; // Bạn có thể chỉnh 0.02s nhanh chậm tùy ý
+            col.style.animationDelay = `${visibleIndex * 0.02}s`;
             visibleIndex++;
         }
     });
@@ -88,7 +84,7 @@ function reAnimateVisibleProducts() {
 // 2. CÁC HÀM SẮP XẾP VÀ LỌC
 // ==========================================
 
-// Hàm phụ trợ để đổi tên nút Dropdown (nếu bạn có dùng ID sortDropdownBtn cho nút)
+// Hàm phụ trợ để đổi tên nút Dropdown
 function updateDropdownTitle(text) {
     const btn = document.getElementById('sortDropdownBtn');
     if (btn) btn.innerText = text;
@@ -96,62 +92,58 @@ function updateDropdownTitle(text) {
 
 window.giaTangDan = function(event) {
     if (event) event.preventDefault();
-    updateDropdownTitle("Giá tăng dần"); // Cập nhật chữ trên nút
+    updateDropdownTitle("Giá tăng dần");
 
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    // BƯỚC QUAN TRỌNG: Bỏ lọc "Hàng mới nhất", hiển thị lại toàn bộ sản phẩm
+    // BƯỚC ĐÃ SỬA: Hiển thị lại toàn bộ sản phẩm trước khi sắp xếp
     productCols.forEach(col => col.style.display = 'block');
 
-    // Sắp xếp
     productCols.sort((a, b) => parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price')));
     
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
     
-    reAnimateVisibleProducts(); // Gọi hàm reset animation
+    reAnimateVisibleProducts(); 
 }
 
 window.giaGiamDan = function(event) {
     if (event) event.preventDefault();
-    updateDropdownTitle("Giá giảm dần"); // Cập nhật chữ trên nút
+    updateDropdownTitle("Giá giảm dần"); 
 
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    // BƯỚC QUAN TRỌNG: Bỏ lọc "Hàng mới nhất", hiển thị lại toàn bộ sản phẩm
+    // BƯỚC ĐÃ SỬA: Hiển thị lại toàn bộ sản phẩm trước khi sắp xếp
     productCols.forEach(col => col.style.display = 'block');
 
-    // Sắp xếp
     productCols.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
     
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
 
-    reAnimateVisibleProducts(); // Gọi hàm reset animation
+    reAnimateVisibleProducts(); 
 }
 
 window.hangMoiNhat = function(event) {
     if (event) event.preventDefault();
-    updateDropdownTitle("Hàng mới nhất"); // Cập nhật chữ trên nút
+    updateDropdownTitle("Hàng mới nhất"); 
 
     const productCols = Array.from(document.querySelectorAll('.product-col'));
     
     productCols.forEach(col => {
-        // Kiểm tra xem trong cột sản phẩm có thẻ badge "Mới" không
         const isNew = col.querySelector('.badge.bg-success'); 
         col.style.display = isNew ? 'block' : 'none';
     });
 
-    reAnimateVisibleProducts(); // Gọi hàm reset animation
+    reAnimateVisibleProducts(); 
 }
 
 window.locTheoGia = function() {
     const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
     const productCols = document.querySelectorAll('.product-col');
 
-    // Mảng lưu các khoảng giá (chỉ lấy những checkbox thuộc nhóm giá)
     const priceRanges = Array.from(checkedBoxes)
         .map(box => box.value)
         .filter(val => val.includes('-'));
@@ -161,7 +153,7 @@ window.locTheoGia = function() {
         let isMatch = false;
 
         if (priceRanges.length === 0) {
-            col.style.display = 'block'; // Nếu không chọn giá nào, tạm thời cho hiện hết để nhường quyền quyết định cho filter danh mục (nếu có)
+            col.style.display = 'block'; 
         } else {
             priceRanges.forEach(range => {
                 let rangeParts = range.split('-'); 
@@ -174,8 +166,6 @@ window.locTheoGia = function() {
         }
     });
 
-    // NOTE: Lý tưởng nhất là kết hợp cả locTheoGia và locTheoDanhMuc lại, 
-    // nhưng ở đây mình sẽ gọi luôn reAnimate để animation chạy ngay lập tức.
     reAnimateVisibleProducts();
 }
 
@@ -183,10 +173,9 @@ window.locTheoDanhMuc = function() {
     const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
     const productCols = document.querySelectorAll('.product-col');
     
-    // Mảng lưu các danh mục (loại bỏ các value liên quan đến giá)
     const selectedCategories = Array.from(checkedBoxes)
         .map(box => box.value)
-        .filter(val => !val.includes('-0') && !val.includes('0-')); // Cách tạm thời để phân biệt checkbox danh mục và giá
+        .filter(val => !val.includes('-0') && !val.includes('0-')); 
 
     productCols.forEach(col => {
         const category = col.id;
@@ -198,7 +187,7 @@ window.locTheoDanhMuc = function() {
         }
     });
 
-    reAnimateVisibleProducts(); // Gọi hàm reset animation
+    reAnimateVisibleProducts(); 
 }
 
 // 3. KHỞI CHẠY KHI TRANG LOAD
