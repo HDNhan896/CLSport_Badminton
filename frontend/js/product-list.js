@@ -88,11 +88,23 @@ function reAnimateVisibleProducts() {
 // 2. CÁC HÀM SẮP XẾP VÀ LỌC
 // ==========================================
 
+// Hàm phụ trợ để đổi tên nút Dropdown (nếu bạn có dùng ID sortDropdownBtn cho nút)
+function updateDropdownTitle(text) {
+    const btn = document.getElementById('sortDropdownBtn');
+    if (btn) btn.innerText = text;
+}
+
 window.giaTangDan = function(event) {
     if (event) event.preventDefault();
+    updateDropdownTitle("Giá tăng dần"); // Cập nhật chữ trên nút
+
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
+    // BƯỚC QUAN TRỌNG: Bỏ lọc "Hàng mới nhất", hiển thị lại toàn bộ sản phẩm
+    productCols.forEach(col => col.style.display = 'block');
+
+    // Sắp xếp
     productCols.sort((a, b) => parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price')));
     
     container.innerHTML = ''; 
@@ -103,11 +115,17 @@ window.giaTangDan = function(event) {
 
 window.giaGiamDan = function(event) {
     if (event) event.preventDefault();
+    updateDropdownTitle("Giá giảm dần"); // Cập nhật chữ trên nút
+
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    productCols.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
+    // BƯỚC QUAN TRỌNG: Bỏ lọc "Hàng mới nhất", hiển thị lại toàn bộ sản phẩm
+    productCols.forEach(col => col.style.display = 'block');
 
+    // Sắp xếp
+    productCols.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
+    
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
 
@@ -116,10 +134,13 @@ window.giaGiamDan = function(event) {
 
 window.hangMoiNhat = function(event) {
     if (event) event.preventDefault();
+    updateDropdownTitle("Hàng mới nhất"); // Cập nhật chữ trên nút
+
     const productCols = Array.from(document.querySelectorAll('.product-col'));
     
     productCols.forEach(col => {
-        const isNew = col.querySelector('.badge.bg-success');
+        // Kiểm tra xem trong cột sản phẩm có thẻ badge "Mới" không
+        const isNew = col.querySelector('.badge.bg-success'); 
         col.style.display = isNew ? 'block' : 'none';
     });
 

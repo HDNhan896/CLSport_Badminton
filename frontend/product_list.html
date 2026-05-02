@@ -22,40 +22,39 @@
                         <div class="mb-3 border-bottom p-3 ps-4">
                             <div class="fw-bold mb-4">
                                 Danh mục sản phẩm
-                            </div>   
+                            </div>
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category1" value="Vợt-Cầu-Lông">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category1" value="Vợt-Cầu-Lông">
                                 <label class="form-check-label" for="category1">
                                     Vợt cầu lông
                                 </label>
                             </div>
-                            
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category2" value="Giày-Cầu-Lông">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category2" value="Giày-Cầu-Lông">
                                 <label class="form-check-label" for="category2">
                                     Giày cầu lông
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category3" value="Áo-Cầu-Lông">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category3" value="Áo-Cầu-Lông">
                                 <label class="form-check-label" for="category3">
                                     Áo cầu lông
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category4" value="Quần-Cầu-Lông">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category4" value="Quần-Cầu-Lông">
                                 <label class="form-check-label" for="category4">
                                     Quần cầu lông
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category5" value="Túi-Cầu-Lông">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category5" value="Túi-Cầu-Lông">
                                 <label class="form-check-label" for="category5">
                                     Túi cầu lông
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category6" value="Phụ-Kiện">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input rounded-5" type="checkbox" id="category6" value="Phụ-Kiện">
                                 <label class="form-check-label" for="category6">
                                     Phụ kiện cầu lông
                                 </label>
@@ -66,31 +65,31 @@
                                 Chọn mức giá
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price1" value="0-500000">
+                                <input onchange="locTheoGia()" class="form-check-input rounded-5" type="checkbox" id="price1" value="0-500000">
                                 <label class="form-check-label" for="price1">
                                     Dưới 500.000đ
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price2" value="500000-1000000">
+                                <input onchange="locTheoGia()" class="form-check-input rounded-5" type="checkbox" id="price2" value="500000-1000000">
                                 <label class="form-check-label" for="price2">
                                     500.000đ đến 1.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price3" value="1000000-2000000">
+                                <input onchange="locTheoGia()" class="form-check-input rounded-5" type="checkbox" id="price3" value="1000000-2000000">
                                 <label class="form-check-label" for="price3">
                                     1.000.000đ - 2.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price4" value="2000000-3000000">
+                                <input onchange="locTheoGia()" class="form-check-input rounded-5" type="checkbox" id="price4" value="2000000-3000000">
                                 <label class="form-check-label" for="price4">
                                     2.000.000đ - 3.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price5" value="3000000-max">
+                                <input onchange="locTheoGia()" class="form-check-input rounded-5" type="checkbox" id="price5" value="3000000-max">
                                 <label class="form-check-label" for="price5">
                                     Trên 3.000.000đ
                                 </label>
@@ -104,10 +103,10 @@
                         <div class="col-6 text-end">
                             <div class="dropdown">
                                 <button class="btn btn-light border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Xắp xếp theo giá
+                                    Sắp xếp
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a onclick="giaTangDan(event)" class="dropdown-item" href="#">Giá tăng đần</a></li>
+                                  <li><a onclick="giaTangDan(event)" class="dropdown-item" href="#">Giá tăng dần</a></li>
                                   <li><a onclick="giaGiamDan(event)" class="dropdown-item" href="#">Giá giảm dần</a></li>
                                   <li><a onclick="hangMoiNhat(event)" class="dropdown-item" href="#">Hàng mới nhất</a></li>
                                 </ul>
