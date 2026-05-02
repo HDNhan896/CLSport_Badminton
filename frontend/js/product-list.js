@@ -182,8 +182,32 @@ window.locTheoDanhMuc = function() {
 
 // 3. KHỞI CHẠY KHI TRANG LOAD
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Render tất cả sản phẩm ra UI trước
     renderAllProducts();
 
+    // 2. Setup offcanvas menu (Giữ nguyên của bạn)
     const menuContent = document.getElementById('Loc').innerHTML;
     document.getElementById('Loc-offcanva').innerHTML = menuContent;    
+
+    // 3. TỰ ĐỘNG CHỌN CHECKBOX TỪ URL (CHỨC NĂNG MỚI)
+    // Lấy tham số 'category' từ thanh địa chỉ trình duyệt
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromURL = urlParams.get('category');
+
+    if (categoryFromURL) {
+        // Tìm ô checkbox có value trùng với category truyền qua
+        // Tìm trong cả menu trên PC (id="Loc") và Mobile (id="Loc-offcanva")
+        const targetCheckboxes = document.querySelectorAll(`input[value="${categoryFromURL}"]`);
+        
+        if (targetCheckboxes.length > 0) {
+            targetCheckboxes.forEach(checkbox => {
+                checkbox.checked = true; // Đánh dấu tick vào ô đó
+            });
+            
+            // Tự động gọi hàm lọc danh mục để ẩn các sản phẩm không liên quan
+            if (typeof window.locTheoDanhMuc === "function") {
+                window.locTheoDanhMuc(); 
+            }
+        }
+    }
 });
