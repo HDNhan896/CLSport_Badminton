@@ -11,7 +11,6 @@ function renderProductsByCategory(categoryName) {
     if (!productWrapper) return;
 
     // --- Xử lý đồng bộ tên danh mục ---
-    // Trên giao diện ghi "Túi Vợt Cầu Lông", nhưng trong data lưu là "Túi Cầu Lông"
     let targetCategory = categoryName;
     if (categoryName === "Túi Vợt Cầu Lông") {
         targetCategory = "Túi Cầu Lông";
@@ -20,7 +19,7 @@ function renderProductsByCategory(categoryName) {
     // Lọc sản phẩm
     const filteredProducts = PRODUCTS.filter(product => product.category === targetCategory);
 
-    // Nếu không có sản phẩm nào (ví dụ: Váy, Balo hiện chưa có data)
+    // Nếu không có sản phẩm nào
     if (filteredProducts.length === 0) {
         productWrapper.innerHTML = `
             <div class="swiper-slide" style="width: 100%;">
@@ -30,15 +29,54 @@ function renderProductsByCategory(categoryName) {
     } else {
         // Render HTML sản phẩm
         const htmlRender = filteredProducts.map(product => {
+            
+            // Xử lý hiển thị phần trăm giảm giá
+            let discountBadge = '';
+            let originalPriceHtml = '<div style="height: 19px;"></div>'; // Giữ khoảng trống nếu không có giá gốc để các card đều nhau
+            if (product.originalPrice && product.originalPrice > product.price) {
+                let discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                discountBadge = `<span class="badge bg-warning text-dark position-absolute shadow-sm" style="top: 10px; right: 10px; z-index: 10;">-${discountPercent}%</span>`;
+                
+                originalPriceHtml = `<div class="text-muted text-decoration-line-through small">${formatPrice(product.originalPrice)}</div>`;
+            }
+
+            // Xử lý hiển thị nhãn Mới và Bán chạy
+            const newBadge = product.isNew ? `<span class="badge bg-success position-absolute shadow-sm" style="top: 10px; left: 10px; z-index: 10;">MỚI</span>` : '';
+            
+            let bestSellerLeft = product.isNew ? "60px" : "10px";
+            const bestSellerBadge = product.isBestSeller ? `<span class="badge bg-danger position-absolute shadow-sm" style="top: 10px; left: ${bestSellerLeft}; z-index: 10;">BÁN CHẠY</span>` : '';
+
+            // Định dạng giá bán
+            const priceHtml = `<div class="text-danger fw-bold fs-6">${formatPrice(product.price)}</div>`;
+
             return `
-            <div class="swiper-slide shadow rounded">
-                <a href="product.html?id=${product.id}" class="product-card" title="${product.title}">
-                    <div class="product-img">
-                        <img src="${product.cover}" alt="${product.title}">
+            <div class="swiper-slide">
+                <div class="card h-100 border-0 shadow-sm product-card-hover position-relative">
+                    ${newBadge}
+                    ${bestSellerBadge}
+                    ${discountBadge}
+                    
+                    <!-- Phần link sang trang chi tiết -->
+                    <a href="product.html?id=${product.id}" class="text-decoration-none text-dark d-flex flex-column h-100">
+                        <div class="p-3">
+                            <img src="${product.cover}" class="card-img-top" alt="${product.title}" style="object-fit: contain; height: 180px; width: 100%;">
+                        </div>
+                        <div class="card-body text-center d-flex flex-column justify-content-end p-2 pb-0">
+                            <h6 class="card-title text-truncate mb-2" title="${product.title}" style="font-size: 0.95rem;">${product.title}</h6>
+                            <div class="mt-auto">
+                                ${priceHtml}
+                                ${originalPriceHtml}
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Phần nút Thêm vào giỏ hàng (Đặt ngoài thẻ <a>) -->
+                    <div class="card-footer bg-transparent border-0 p-3 pt-2 text-center btn-cart-wrapper">
+                        <button class="btn btn-outline-danger w-100 btn-add-cart" onclick="addToCart(${product.id}, event)">
+                            <i class="fa-solid fa-cart-plus me-1"></i> Thêm vào giỏ
+                        </button>
                     </div>
-                    <div class="product-name text-truncate">${product.title}</div>
-                    <div class="product-price">${formatPrice(product.price)}</div>
-                </a>
+                </div>
             </div>
             `;
         }).join('');
@@ -46,12 +84,56 @@ function renderProductsByCategory(categoryName) {
         productWrapper.innerHTML = htmlRender;
     }
 
-    // Quan trọng: Cập nhật lại Swiper sau khi chèn HTML mới
-    // typeof giúp kiểm tra xem biến productSwiper đã được tạo chưa
     if (typeof productSwiper !== 'undefined') {
-        productSwiper.update(); // Báo cho Swiper biết DOM vừa thay đổi
-        productSwiper.slideTo(0); // Trượt về đầu danh sách
+        productSwiper.update(); 
+        productSwiper.slideTo(0); 
     }
+}
+
+// Hàm thêm vào giỏ hàng và hiện thông báo
+window.addToCart = function(productId, event) {
+    // 1. Ngăn chặn sự kiện click lan ra thẻ <a> bên ngoài (tránh bị nhảy sang trang chi tiết)
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // --- Ở ĐÂY BẠN CÓ THỂ VIẾT LOGIC LƯU VÀO LOCAL STORAGE SAU NÀY ---
+    // Ví dụ: const cart = JSON.parse(localStorage.getItem('cart')) || []; ...
+
+    // 2. TẠO THÔNG BÁO (TOAST) GÓC DƯỚI TRÁI
+    let toastContainer = document.getElementById('toast-container');
+    
+    // Nếu chưa có khung chứa thông báo thì tạo mới
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        // Ép CSS trực tiếp: cố định ở góc dưới trái màn hình
+        toastContainer.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;';
+        document.body.appendChild(toastContainer);
+    }
+
+    // Tạo phần tử thông báo
+    const toast = document.createElement('div');
+    toast.className = 'custom-toast shadow'; // Gắn class để làm CSS animation
+    toast.innerHTML = `
+        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid #d95327; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
+            <i class="fa-solid fa-circle-check fs-4 me-3" style="color: #d95327;"></i>
+            <div>
+                <div class="text-dark fw-bold" style="font-size: 0.95rem;">Thành công!</div>
+                <div class="text-muted" style="font-size: 0.85rem;">Đã thêm sản phẩm vào giỏ hàng</div>
+            </div>
+        </div>
+    `;
+
+    // Nhét thông báo vào khung
+    toastContainer.appendChild(toast);
+
+    // 3. Tự động biến mất sau 3 giây
+    setTimeout(() => {
+        toast.classList.add('hide-toast'); // Thêm class ẩn đi
+        setTimeout(() => toast.remove(), 400); // Đợi CSS chạy xong rồi xóa hẳn khỏi HTML cho nhẹ máy
+    }, 3000);
 }
 
 // ==========================================

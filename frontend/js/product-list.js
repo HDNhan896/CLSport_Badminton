@@ -95,6 +95,8 @@ function locTheoGia() {
 }
 
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const menuContent = document.getElementById('Loc').innerHTML;
     document.getElementById('Loc-offcanva').innerHTML = menuContent;    

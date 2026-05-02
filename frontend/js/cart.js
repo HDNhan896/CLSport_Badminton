@@ -1,3 +1,5 @@
+const userCart = []
+
 // Hàm để chuyển đổi trạng thái giỏ hàng (Chỉ để bạn test)
 function toggleCartStatus(isEmpty) {
     const fullCart = document.getElementById('cart-full');
