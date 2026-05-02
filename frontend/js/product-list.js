@@ -1,21 +1,15 @@
 import { PRODUCTS } from './badmintonProducts.js';
 
-
-// Hàm định dạng giá tiền
 const formatPrice = (price) => price.toLocaleString('vi-VN') + ' đ';
 
-// ==========================================
-// 1. HÀM RENDER SẢN PHẨM VÀO GIAO DIỆN
-// ==========================================
+// 1. RENDER BAN ĐẦU
 function renderAllProducts() {
     const container = document.getElementById("sanPham");
     if (!container) return;
 
     const htmlRender = PRODUCTS.map((product, index) => {
-        // Tốc độ hiện (delay) giảm xuống 0.05s để load danh sách dài mượt hơn
         const delay = index * 0.01; 
         
-        // --- Logic Badge & Giá (Giống y hệt main.js) ---
         let discountBadge = '';
         let originalPriceHtml = '<div style="height: 19px;"></div>';
         if (product.originalPrice && product.originalPrice > product.price) {
@@ -28,13 +22,11 @@ function renderAllProducts() {
         let bestSellerLeft = product.isNew ? "60px" : "10px";
         const bestSellerBadge = product.isBestSeller ? `<span class="badge position-absolute shadow-sm" style="top: 10px; left: ${bestSellerLeft}; z-index: 10; background-color: #d95327;">BÁN CHẠY</span>` : '';
 
-        // Lưu giá trị số vào thuộc tính data-price để lát nữa lọc/sắp xếp cho dễ
         const priceHtml = `
             <div class="fw-bold fs-6" style="color: #d95327;">
                 ${formatPrice(product.price)}
             </div>`;
 
-        // TRẢ VỀ HTML: Bọc thêm cột (col-6 col-md-4 col-lg-3) của Bootstrap
         return `
         <div id="${product.category.split(' ').join('-')}" class="col-6 col-md-4 col-lg-3 mb-3 product-col product-slide-enter" data-price="${product.price}" style="animation-delay: ${delay}s;">
             <div class="card h-100 border-0 shadow-sm product-card-hover position-relative overflow-hidden">
@@ -69,125 +61,129 @@ function renderAllProducts() {
 }
 
 // ==========================================
-// 2. CÁC HÀM SẮP XẾP VÀ LỌC (ĐÃ FIX LẠI LỖI)
+// HÀM TRỢ GIÚP: RESET ANIMATION CHO CÁC PHẦN TỬ ĐANG HIỂN THỊ
+// ==========================================
+function reAnimateVisibleProducts() {
+    const productCols = document.querySelectorAll('.product-col');
+    let visibleIndex = 0;
+
+    productCols.forEach(col => {
+        // Chỉ xử lý những phần tử đang được hiển thị (display không phải là 'none')
+        if (col.style.display !== 'none') {
+            // Xóa class animation cũ
+            col.classList.remove('product-slide-enter');
+            
+            // Ép trình duyệt tính toán lại (Force reflow) để animation có thể chạy lại
+            void col.offsetWidth;
+            
+            // Thêm lại class animation và tính lại delay dựa trên thứ tự hiển thị mới
+            col.classList.add('product-slide-enter');
+            col.style.animationDelay = `${visibleIndex * 0.02}s`; // Bạn có thể chỉnh 0.02s nhanh chậm tùy ý
+            visibleIndex++;
+        }
+    });
+}
+
+// ==========================================
+// 2. CÁC HÀM SẮP XẾP VÀ LỌC
 // ==========================================
 
-// Sắp xếp giá tăng dần
 window.giaTangDan = function(event) {
     if (event) event.preventDefault();
     const container = document.getElementById("sanPham"); 
-    // Lấy nguyên cái cột (class product-col) thay vì chỉ lấy card
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    productCols.sort((a, b) => {
-        // Lấy giá trị từ thuộc tính data-price mình đã gài sẵn ở trên
-        return parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price'));
-    });
-
+    productCols.sort((a, b) => parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price')));
+    
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
+    
+    reAnimateVisibleProducts(); // Gọi hàm reset animation
 }
 
-// Sắp xếp giá giảm dần
 window.giaGiamDan = function(event) {
     if (event) event.preventDefault();
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    productCols.sort((a, b) => {
-        return parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price'));
-    });
+    productCols.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
 
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
+
+    reAnimateVisibleProducts(); // Gọi hàm reset animation
 }
 
-//Filter hàng mới nhất lọc các sản phẩm mới (Dựa vào thuộc tính isNew)
 window.hangMoiNhat = function(event) {
     if (event) event.preventDefault();
-    const container = document.getElementById("sanPham"); 
-    const productCols = Array.from(container.querySelectorAll('.product-col'));
+    const productCols = Array.from(document.querySelectorAll('.product-col'));
+    
     productCols.forEach(col => {
         const isNew = col.querySelector('.badge.bg-success');
-        if (isNew) {
-            col.style.display = 'block';
-        } else {
-            col.style.display = 'none';
-        }
+        col.style.display = isNew ? 'block' : 'none';
     });
+
+    reAnimateVisibleProducts(); // Gọi hàm reset animation
 }
 
-
-
-// Lọc theo giá
 window.locTheoGia = function() {
     const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
-    const productCols = document.querySelectorAll('.product-col'); // Lấy tất cả cột sản phẩm
+    const productCols = document.querySelectorAll('.product-col');
+
+    // Mảng lưu các khoảng giá (chỉ lấy những checkbox thuộc nhóm giá)
+    const priceRanges = Array.from(checkedBoxes)
+        .map(box => box.value)
+        .filter(val => val.includes('-'));
 
     productCols.forEach(col => {
-        // Lấy giá thực tế của sản phẩm
         let price = parseInt(col.getAttribute('data-price'));
         let isMatch = false;
 
-        // Nếu không có checkbox nào được tick -> Hiện tất cả
-        if (checkedBoxes.length === 0) {
-            col.style.display = 'block';
-            return; 
-        }
-
-        checkedBoxes.forEach(box => {
-            let range = box.value.split('-'); 
-            let min = parseInt(range[0]);
-            let max = range[1] === 'max' ? Infinity : parseInt(range[1]);
-
-            if (price >= min && price <= max) {
-                isMatch = true; 
-            }
-        });
-
-        // Ẩn/hiện nguyên cái cột
-        if (isMatch) {
-            col.style.display = 'block';
+        if (priceRanges.length === 0) {
+            col.style.display = 'block'; // Nếu không chọn giá nào, tạm thời cho hiện hết để nhường quyền quyết định cho filter danh mục (nếu có)
         } else {
-            col.style.display = 'none';
+            priceRanges.forEach(range => {
+                let rangeParts = range.split('-'); 
+                let min = parseInt(rangeParts[0]);
+                let max = rangeParts[1] === 'max' ? Infinity : parseInt(rangeParts[1]);
+
+                if (price >= min && price <= max) isMatch = true; 
+            });
+            col.style.display = isMatch ? 'block' : 'none';
         }
     });
+
+    // NOTE: Lý tưởng nhất là kết hợp cả locTheoGia và locTheoDanhMuc lại, 
+    // nhưng ở đây mình sẽ gọi luôn reAnimate để animation chạy ngay lập tức.
+    reAnimateVisibleProducts();
 }
 
-// Lọc theo danh mục
 window.locTheoDanhMuc = function() {
     const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
     const productCols = document.querySelectorAll('.product-col');
+    
+    // Mảng lưu các danh mục (loại bỏ các value liên quan đến giá)
+    const selectedCategories = Array.from(checkedBoxes)
+        .map(box => box.value)
+        .filter(val => !val.includes('-0') && !val.includes('0-')); // Cách tạm thời để phân biệt checkbox danh mục và giá
+
     productCols.forEach(col => {
         const category = col.id;
-        let isMatch = false;
-
-        if (checkedBoxes.length === 0) {
-            col.style.display = 'block';
-            return; 
-        }
-        checkedBoxes.forEach(box => {
-            if (box.value === category) {
-                isMatch = true;
-            }
-        });
-
-        if (isMatch) {
-            col.style.display = 'block';
+        
+        if (selectedCategories.length === 0) {
+             col.style.display = 'block';
         } else {
-            col.style.display = 'none';
+             col.style.display = selectedCategories.includes(category) ? 'block' : 'none';
         }
     });
+
+    reAnimateVisibleProducts(); // Gọi hàm reset animation
 }
 
-// ==========================================
 // 3. KHỞI CHẠY KHI TRANG LOAD
-// ==========================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Render sản phẩm ra UI
     renderAllProducts();
 
-    // Setup offcanvas menu
     const menuContent = document.getElementById('Loc').innerHTML;
     document.getElementById('Loc-offcanva').innerHTML = menuContent;    
 });
