@@ -16,60 +16,100 @@
     <header id="header"></header>
     <div class="container my-3">
         <section class="container-fluid">
-            <div class="row px-3 g-3">
+            <div class="row px-3 g-4">
                 <div class="col-12 col-md-3 d-none d-md-block" >
                     <div class="row filter-box pt-3 pb-3" id="Loc">
-                        <div class="mb-3 border-bottom ps-4">
+                        <div class="mb-3 border-bottom p-3 ps-4">
+                            <div class="fw-bold mb-4">
+                                Danh mục sản phẩm
+                            </div>   
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category1" value="Vợt-Cầu-Lông">
+                                <label class="form-check-label" for="category1">
+                                    Vợt cầu lông
+                                </label>
+                            </div>
+                            
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category2" value="Giày-Cầu-Lông">
+                                <label class="form-check-label" for="category2">
+                                    Giày cầu lông
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category3" value="Áo-Cầu-Lông">
+                                <label class="form-check-label" for="category3">
+                                    Áo cầu lông
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category4" value="Quần-Cầu-Lông">
+                                <label class="form-check-label" for="category4">
+                                    Quần cầu lông
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category5" value="Túi-Cầu-Lông">
+                                <label class="form-check-label" for="category5">
+                                    Túi cầu lông
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input onchange="locTheoDanhMuc()" class="form-check-input" type="checkbox" id="category6" value="Phụ-Kiện">
+                                <label class="form-check-label" for="category6">
+                                    Phụ kiện cầu lông
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3 ps-4">
                             <div class="fw-bold mb-4">
                                 Chọn mức giá
                             </div>
                             <div class="form-check">
                                 <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price1" value="0-500000">
                                 <label class="form-check-label" for="price1">
-                                    Giá dưới 500.00 Đ
+                                    Dưới 500.000đ
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price2" value="500000-1000000">
                                 <label class="form-check-label" for="price2">
-                                    500.00 Đ đến 1 Triệu
+                                    500.000đ đến 1.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price3" value="1000000-2000000">
                                 <label class="form-check-label" for="price3">
-                                    1-2 triệu
+                                    1.000.000đ - 2.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price4" value="2000000-3000000">
                                 <label class="form-check-label" for="price4">
-                                    2-3 triệu
+                                    2.000.000đ - 3.000.000đ
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input onchange="locTheoGia()" class="form-check-input" type="checkbox" id="price5" value="3000000-max">
                                 <label class="form-check-label" for="price5">
-                                    Trên 3 triệu
+                                    Trên 3.000.000đ
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-9">
-                    <div class="row bg-body-secondary mx-2 my-3 rounded">
-                        <div class="col-6">
-                            <h3>Shop cầu lông web</h3>
-                        </div>
+                    <div class="row mx-2 my-3 rounded">
+                        <div class="col-6"></div>
                         <div class="col-6 text-end">
                             <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-light border-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Xắp xếp theo giá
                                 </button>
                                 <ul class="dropdown-menu">
                                   <li><a onclick="giaTangDan(event)" class="dropdown-item" href="#">Giá tăng đần</a></li>
                                   <li><a onclick="giaGiamDan(event)" class="dropdown-item" href="#">Giá giảm dần</a></li>
-                                  <li><a class="dropdown-item" href="#">Hàng mới nhất</a></li>
+                                  <li><a onclick="hangMoiNhat(event)" class="dropdown-item" href="#">Hàng mới nhất</a></li>
                                 </ul>
                             </div>
                         </div>
