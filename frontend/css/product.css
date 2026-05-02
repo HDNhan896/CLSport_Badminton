@@ -59,3 +59,80 @@ legend {
     background-color: #e56439 !important;
     color: white !important;
 }
+
+/* ==========================================
+   1. ANIMATION XUẤT HIỆN SẢN PHẨM LIÊN QUAN (MORPH)
+========================================== */
+.product-slide-enter {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: morphFadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes morphFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   2. HIỆU ỨNG ZOOM ẢNH VÀ NỔI THẺ SẢN PHẨM
+========================================== */
+.img-zoom-container {
+    overflow: hidden; /* Chặn ảnh tràn ra ngoài khung khi zoom */
+}
+
+.product-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.product-card-hover .card-img-top {
+    transition: transform 0.5s ease-in-out; /* Tốc độ zoom ảnh */
+}
+
+/* Khi hover vào nguyên cái thẻ card */
+.product-card-hover:hover {
+    transform: translateY(-5px); /* Nhấc lên 5px */
+    box-shadow: 0 .5rem 1rem rgba(217, 83, 39, 0.15) !important; /* Đổ bóng màu đỏ gạch */
+    border: 1px solid #d95327 !important; /* Hiện viền đỏ gạch */
+}
+
+/* Khi hover vào card thì ảnh bên trong phóng to 10% */
+.product-card-hover:hover .card-img-top {
+    transform: scale(1.1); 
+}
+
+/* ==========================================
+   3. NÚT THÊM VÀO GIỎ HÀNG CHUYỂN MÀU & TRƯỢT
+========================================== */
+.btn-add-cart {
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+    background-color: #d95327 !important;
+    color: white !important;
+    border-color: #d95327 !important;
+}
+
+/* Ẩn nút trên màn hình lớn (PC), chỉ hiện khi hover */
+@media (min-width: 992px) {
+    .btn-cart-wrapper {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .product-card-hover:hover .btn-cart-wrapper {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
