@@ -13,7 +13,7 @@ function renderAllProducts() {
 
     const htmlRender = PRODUCTS.map((product, index) => {
         // Tốc độ hiện (delay) giảm xuống 0.05s để load danh sách dài mượt hơn
-        const delay = index * 0.05; 
+        const delay = index * 0.01; 
         
         // --- Logic Badge & Giá (Giống y hệt main.js) ---
         let discountBadge = '';
@@ -36,7 +36,7 @@ function renderAllProducts() {
 
         // TRẢ VỀ HTML: Bọc thêm cột (col-6 col-md-4 col-lg-3) của Bootstrap
         return `
-        <div class="col-6 col-md-4 col-lg-3 mb-3 product-col product-slide-enter" data-price="${product.price}" style="animation-delay: ${delay}s;">
+        <div id="${product.category.split(' ').join('-')}" class="col-6 col-md-4 col-lg-3 mb-3 product-col product-slide-enter" data-price="${product.price}" style="animation-delay: ${delay}s;">
             <div class="card h-100 border-0 shadow-sm product-card-hover position-relative overflow-hidden">
                 ${newBadge}
                 ${bestSellerBadge}
@@ -102,6 +102,23 @@ window.giaGiamDan = function(event) {
     productCols.forEach(col => container.appendChild(col));
 }
 
+//Filter hàng mới nhất lọc các sản phẩm mới (Dựa vào thuộc tính isNew)
+window.hangMoiNhat = function(event) {
+    if (event) event.preventDefault();
+    const container = document.getElementById("sanPham"); 
+    const productCols = Array.from(container.querySelectorAll('.product-col'));
+    productCols.forEach(col => {
+        const isNew = col.querySelector('.badge.bg-success');
+        if (isNew) {
+            col.style.display = 'block';
+        } else {
+            col.style.display = 'none';
+        }
+    });
+}
+
+
+
 // Lọc theo giá
 window.locTheoGia = function() {
     const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
@@ -129,6 +146,32 @@ window.locTheoGia = function() {
         });
 
         // Ẩn/hiện nguyên cái cột
+        if (isMatch) {
+            col.style.display = 'block';
+        } else {
+            col.style.display = 'none';
+        }
+    });
+}
+
+// Lọc theo danh mục
+window.locTheoDanhMuc = function() {
+    const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
+    const productCols = document.querySelectorAll('.product-col');
+    productCols.forEach(col => {
+        const category = col.id;
+        let isMatch = false;
+
+        if (checkedBoxes.length === 0) {
+            col.style.display = 'block';
+            return; 
+        }
+        checkedBoxes.forEach(box => {
+            if (box.value === category) {
+                isMatch = true;
+            }
+        });
+
         if (isMatch) {
             col.style.display = 'block';
         } else {
