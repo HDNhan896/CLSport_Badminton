@@ -1,4 +1,5 @@
 import { PRODUCTS } from './badmintonProducts.js';
+import { addToCart } from './cart.js';
 
 const formatPrice = (price) => price.toLocaleString('vi-VN') + ' đ';
 // ==========================================
