@@ -1,12 +1,13 @@
 import { PRODUCTS } from "./badmintonProducts.js";
 
-// Product quantity
+// Tăng số lượng
 window.increaseQuantity = function() {
     const quantityInput = document.querySelector('.select-quantity input');
     let currentValue = parseInt(quantityInput.value);
     quantityInput.value = currentValue + 1;
 }
 
+// Giảm số lượng nhưng không cho phép nhỏ hơn 1
 window.decreaseQuantity = function() {
     const quantityInput = document.querySelector('.select-quantity input');
     let currentValue = parseInt(quantityInput.value);
@@ -15,11 +16,13 @@ window.decreaseQuantity = function() {
     }
 }
 
+// Hàm lấy ID sản phẩm từ URL
 function getProductId() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
 
+// Hàm chính để render sản phẩm
 function renderProduct() {
     const id = getProductId();
     const product = PRODUCTS.find(p => p.id == id);
@@ -160,33 +163,27 @@ function renderProduct() {
     }
 
     // 5. Render Sản Phẩm Liên Quan
-    // ... (Giữ nguyên đoạn code renderRelatedProducts ở bên dưới)
-
-    // 5. Render Sản Phẩm Liên Quan
     renderRelatedProducts(product);
 }
 
 // Hàm mới: Xử lý phần Sản Phẩm Liên Quan
 function renderRelatedProducts(currentProduct) {
     const container = document.getElementById('related-products-container');
-    if (!container) return; // Nếu trong HTML chưa thêm div này thì bỏ qua
+    if (!container) return; 
 
-    // Lọc sản phẩm cùng Category nhưng khác ID hiện tại
     const relatedProducts = PRODUCTS.filter(p => 
         p.category === currentProduct.category && p.id !== currentProduct.id
     );
 
-    // Lấy 4 sản phẩm đầu tiên tìm được
     const displayProducts = relatedProducts.slice(0, 4);
 
     let html = '';
 
-    // Thêm biến index để tạo hiệu ứng xuất hiện lần lượt
     displayProducts.forEach((p, index) => {
-        const delay = index * 0.1; // Độ trễ animation morph
+        const delay = index * 0.1; 
 
         let discountBadge = '';
-        let originalPriceHtml = '<div style="height: 19px;"></div>'; // Giữ layout không bị thụt lên xuống
+        let originalPriceHtml = '<div style="height: 19px;"></div>'; 
 
         if (p.originalPrice && p.originalPrice > p.price) {
             let discountPercent = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
@@ -197,13 +194,14 @@ function renderRelatedProducts(currentProduct) {
         }
 
         const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price);
-        const priceHtml = `<div class="fw-bold fs-6" style="color: #d95327;">${priceFormatted}</div>`;
+        
+        // ĐÃ SỬA: Thêm class "current-price" vào thẻ div chứa giá tiền bên dưới
+        const priceHtml = `<div class="fw-bold fs-6 current-price" style="color: #d95327;">${priceFormatted}</div>`;
 
         const newBadge = p.isNew ? `<span class="badge bg-success position-absolute shadow-sm" style="top: 10px; left: 10px; z-index: 10;">MỚI</span>` : '';
         let bestSellerStyle = p.isNew ? "top: 10px; left: 60px;" : "top: 10px; left: 10px;";
         const bestSellerBadge = p.isBestSeller ? `<span class="badge position-absolute shadow-sm" style="${bestSellerStyle}; z-index: 10; background-color: #d95327;">BÁN CHẠY</span>` : '';
 
-        // Render sao đánh giá
         let starsHtml = '';
         const rating = p.rating || 5;
         for (let i = 1; i <= 5; i++) {
@@ -216,6 +214,7 @@ function renderRelatedProducts(currentProduct) {
             }
         }
 
+        // ĐÃ SỬA: Đảm bảo p.id được bọc trong dấu ngoặc kép (phòng trường hợp id có chứa chữ)
         html += `
             <div class="col-md-3 col-sm-6 mb-4 product-slide-enter" style="animation-delay: ${delay}s;">
                 <div class="card h-100 border-0 shadow-sm product-card-hover position-relative overflow-hidden">
@@ -241,7 +240,7 @@ function renderRelatedProducts(currentProduct) {
                     </a>
                     
                     <div class="card-footer bg-transparent border-0 p-3 pt-2 text-center btn-cart-wrapper">
-                        <button class="btn w-100 btn-add-cart" style="border: 1px solid #d95327; color: #d95327;" onclick="addToCart(${p.id}, event)">
+                        <button class="btn w-100 btn-add-cart" style="border: 1px solid #d95327; color: #d95327;" onclick="addToCart('${p.id}', event)">
                             <i class="fa-solid fa-cart-plus me-1"></i> Thêm vào giỏ
                         </button>
                     </div>
@@ -258,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProduct();
 });
 
-
+// Dữ liệu mô tả chi tiết cho từng loại sản phẩm (dựa trên category)
 const PRODUCT_DESCRIPTIONS = {
     "Vợt Cầu Lông": {
         intro: "<strong>{title}</strong> của <strong>{brand}</strong> là dòng vợt cầu lông cao cấp, được chế tác từ vật liệu Carbon siêu bền. Công nghệ khí động học tiên tiến giúp vung vợt nhanh, tối ưu hóa sức mạnh và độ chính xác. Thiết kế khung trợ lực mang lại những cú đập cầu đầy uy lực và cảm giác cầu cực tốt.",
@@ -321,3 +320,93 @@ const PRODUCT_DESCRIPTIONS = {
         ]
     }
 };
+
+// Hàm showToast
+function showToast(type, message) {
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;';
+        document.body.appendChild(toastContainer);
+    }
+
+    // Cấu hình màu sắc, icon và tiêu đề dựa vào loại thông báo (type)
+    let themeColor = '#24bf65'; // Mặc định là xanh lá (thành công)
+    let iconClass = 'fa-solid fa-circle-check';
+    let title = 'Thành công!';
+
+    if (type === 'warning') {
+        themeColor = '#ffc107'; // Màu vàng cam cho cảnh báo
+        iconClass = 'fa-solid fa-triangle-exclamation';
+        title = 'Chú ý!';
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'custom-toast shadow'; 
+    toast.innerHTML = `
+        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid ${themeColor}; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
+            <i class="${iconClass} fs-4 me-3" style="color: ${themeColor};"></i>
+            <div>
+                <div class="text-dark fw-bold" style="font-size: 0.95rem;">${title}</div>
+                <div class="text-muted" style="font-size: 0.85rem;">${message}</div>
+            </div>
+        </div>
+    `;
+
+    toastContainer.appendChild(toast);
+    
+    // Tự động ẩn sau 3 giây
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s';
+        setTimeout(() => toast.remove(), 400); 
+    }, 3000);
+}
+
+// Cập nhật lại hàm addToCartDetail
+window.addToCartDetail = function(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const id = getProductId();
+    const product = PRODUCTS.find(p => p.id == id);
+    if (!product) return;
+
+    const quantityInput = document.querySelector('.select-quantity input');
+    let quantity = parseInt(quantityInput.value) || 0;
+
+    // Thay thế alert() bằng showToast trạng thái 'warning'
+    if (quantity <= 0) {
+        showToast('warning', 'Vui lòng tăng số lượng sản phẩm trước khi thêm vào giỏ!');
+        return;
+    }
+
+    let userCart = JSON.parse(localStorage.getItem('userCart')) || [];
+    const existingItem = userCart.find(item => item.id == id);
+    
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        userCart.push({ 
+            id: product.id, 
+            name: product.title, 
+            price: product.price, 
+            image: product.cover, 
+            quantity: quantity 
+        });
+    }
+
+    localStorage.setItem('userCart', JSON.stringify(userCart));
+
+    if (typeof window.updateCartBadge === 'function') {
+        window.updateCartBadge();
+    }
+
+    // Dùng showToast trạng thái 'success' kèm số lượng động
+    showToast('success', `Đã thêm ${quantity} sản phẩm vào giỏ hàng.`);
+    
+    // Đặt lại số lượng về 1 sau khi thêm thành công
+    quantityInput.value = 1;
+}

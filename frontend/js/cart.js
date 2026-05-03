@@ -53,7 +53,7 @@ export function addToCart(productId, event) {
     showToast();
     updateCartBadge();
 }
-
+// Đảm bảo hàm addToCart có thể được gọi từ HTML
 window.addToCart = addToCart;
 
 // Hàm đếm số lượng để hiển thị icon
@@ -120,12 +120,12 @@ function toggleCartStatus(isEmpty) {
     }
 }
 
-// Hàm chính in sản phẩm ra HTML
+// 1. Cập nhật lại hàm renderCartItems
 function renderCartItems() {
     const cartContainer = document.querySelector('.cart-items');
-    if (!cartContainer) return; // Bỏ qua nếu đang không ở trang giỏ hàng
+    if (!cartContainer) return;
 
-    cartContainer.innerHTML = ''; // Xóa sạch HTML cũ
+    cartContainer.innerHTML = ''; 
 
     if (userCart.length === 0) {
         toggleCartStatus(true); 
@@ -136,11 +136,11 @@ function renderCartItems() {
     toggleCartStatus(false);
     let totalAmount = 0;
 
-    // In từng sản phẩm
     userCart.forEach(item => {
         totalAmount += item.price * item.quantity;
         const priceFormatted = item.price.toLocaleString('vi-VN') + ' đ';
         
+        // CHÚ Ý: Đã thêm dấu nháy đơn vào quanh biến id: '${item.id}'
         const itemHTML = `
             <div class="cart-item d-flex align-items-center mb-3 pb-3 border-bottom">
                 <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain;" class="me-3 border rounded bg-white p-1">
@@ -150,12 +150,12 @@ function renderCartItems() {
                 </div>
                 
                 <div class="quantity-group d-flex align-items-center border rounded me-3" style="min-width: 90px;">
-                    <button class="btn btn-sm text-secondary px-2 border-0" onclick="changeQuantity(${item.id}, -1)">-</button>
+                    <button class="btn btn-sm text-secondary px-2 border-0" onclick="changeQuantity('${item.id}', -1)">-</button>
                     <input type="text" class="form-control form-control-sm text-center border-0 p-0" style="width: 35px;" value="${item.quantity}" readonly>
-                    <button class="btn btn-sm text-secondary px-2 border-0" onclick="changeQuantity(${item.id}, 1)">+</button>
+                    <button class="btn btn-sm text-secondary px-2 border-0" onclick="changeQuantity('${item.id}', 1)">+</button>
                 </div>
                 
-                <button class="btn btn-remove-item text-danger border-0 bg-transparent" onclick="removeItem(${item.id})">
+                <button class="btn btn-remove-item text-danger border-0 bg-transparent" onclick="removeItem('${item.id}')">
                     <i class="fa-solid fa-trash fs-5"></i>
                 </button>
             </div>
@@ -163,7 +163,6 @@ function renderCartItems() {
         cartContainer.insertAdjacentHTML('beforeend', itemHTML);
     });
 
-    // Cập nhật tổng tiền
     const formattedTotal = totalAmount.toLocaleString('vi-VN') + ' đ';
     const totalAmountDisplay = document.querySelector('#cart-total-amount');
     const grandTotalDisplay = document.querySelector('#cart-grand-total'); 
@@ -174,11 +173,10 @@ function renderCartItems() {
     updateCartBadge();
 }
 
-// ------------------------------------------
-// 4. CÁC HÀM CẬP NHẬT TRONG TRANG GIỎ HÀNG
-// ------------------------------------------
+// 2. Cập nhật lại hàm changeQuantity
 window.changeQuantity = function(id, changeAmount) {
-    const item = userCart.find(p => p.id === id);
+    // Đã đổi === thành ==
+    const item = userCart.find(p => p.id == id);
     if (item) {
         item.quantity += changeAmount;
         if (item.quantity < 1) item.quantity = 1; 
@@ -187,13 +185,17 @@ window.changeQuantity = function(id, changeAmount) {
     }
 }
 
+// 3. Cập nhật lại hàm removeItem
 window.removeItem = function(id) {
-    if (confirm('Bạn có chắc muốn xóa sản phẩm này?')) {
-        const index = userCart.findIndex(p => p.id === id);
-        if (index > -1) {
-            userCart.splice(index, 1);
-            saveCartToStorage();
-            renderCartItems(); 
+    // Đã đổi === thành ==
+    const index = userCart.findIndex(p => p.id == id);
+    if (index > -1) {
+        userCart.splice(index, 1);
+        saveCartToStorage();
+        renderCartItems(); 
+        
+        if (typeof window.updateCartBadge === 'function') {
+            window.updateCartBadge();
         }
     }
 }
