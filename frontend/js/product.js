@@ -1,16 +1,22 @@
+//
 import { PRODUCTS } from "./badmintonProducts.js";
 
-// Tăng số lượng
+// Hàm tăng số lượng khi người dùng nhấn nút "+" và cập nhật lại giá tiền tương ứng
 window.increaseQuantity = function() {
+    // Lấy giá trị hiện tại, tăng lên 1 và cập nhật lại input
     const quantityInput = document.querySelector('.select-quantity input');
+    // Nếu giá trị hiện tại không phải là số hợp lệ, đặt lại về 1
     let currentValue = parseInt(quantityInput.value);
     quantityInput.value = currentValue + 1;
 }
 
-// Giảm số lượng nhưng không cho phép nhỏ hơn 1
+// Hàm giảm số lượng nhưng không cho phép nhỏ hơn 1 và cập nhật lại giá tiền tương ứng 
 window.decreaseQuantity = function() {
+    // Lấy giá trị hiện tại, giảm đi 1 nếu lớn hơn 1 và cập nhật lại input
     const quantityInput = document.querySelector('.select-quantity input');
+    // Nếu giá trị hiện tại không phải là số hợp lệ, đặt lại về 1
     let currentValue = parseInt(quantityInput.value);
+    // Chỉ giảm nếu giá trị hiện tại lớn hơn 1 để tránh số lượng âm hoặc bằng 0
     if (currentValue > 1) {
         quantityInput.value = currentValue - 1;
     }
@@ -18,6 +24,7 @@ window.decreaseQuantity = function() {
 
 // Hàm lấy ID sản phẩm từ URL
 function getProductId() {
+    // Sử dụng URLSearchParams để trích xuất tham số 'id' từ URL hiện tại và trả về giá trị của nó. Nếu không tìm thấy tham số 'id', hàm sẽ trả về null.
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
@@ -25,25 +32,37 @@ function getProductId() {
 // Hàm chính để render sản phẩm
 function renderProduct() {
     const id = getProductId();
+    // Tìm sản phẩm trong mảng PRODUCTS dựa trên ID lấy được từ URL. Nếu không tìm thấy sản phẩm nào có ID khớp, hàm sẽ in ra lỗi và dừng lại.
     const product = PRODUCTS.find(p => p.id == id);
+    // Nếu không tìm thấy sản phẩm nào có ID khớp, hàm sẽ in ra lỗi và dừng lại.
     if (!product) {
         console.error("Không tìm thấy sản phẩm");
         return;
     }
 
     // 1. Render Breadcrumb
+    // Lấy phần tử breadcrumb đang hoạt động (có class "text-danger") và phần tử breadcrumb của danh mục sản phẩm (có id "product-category-active"). 
     const breadcrumbActive = document.querySelector('.bread_crumb_list .text-danger');
+    // Nếu phần tử breadcrumbActive tồn tại, nó sẽ được cập nhật với tên sản phẩm hiện tại. 
     const breadcrumbCategoryActive = document.getElementById('product-category-active');
+    // Tương tự, nếu phần tử breadcrumbCategoryActive tồn tại, nó sẽ được cập nhật với tên danh mục của sản phẩm. 
     if (breadcrumbActive) breadcrumbActive.innerText = product.title;
+    // Nếu không tìm thấy phần tử nào trong DOM, các bước cập nhật sẽ được bỏ qua mà không gây lỗi. 
+    // Điều này giúp đảm bảo rằng trang vẫn hoạt động bình thường ngay cả khi cấu trúc HTML không hoàn toàn khớp với mong đợi.
     if (breadcrumbCategoryActive) breadcrumbCategoryActive.innerHTML = `<span>${product.category}</span>&nbsp; &gt;`;
     
     // 2. Render Ảnh sản phẩm kèm Badge (Mới, Bán chạy, Giảm giá)
+    // Lấy phần tử chứa ảnh sản phẩm dựa trên id "render-img-product". 
     const imgContainer = document.getElementById('render-img-product');
+    // Nếu phần tử này tồn tại, nó sẽ được cập nhật để hiển thị ảnh sản phẩm cùng với các badge tương ứng (Mới, Bán chạy, Giảm giá).
     if (imgContainer) {
         // Xử lý hiển thị phần trăm giảm giá
         let discountBadge = '';
+        // Kiểm tra nếu sản phẩm có giá gốc (originalPrice) và giá gốc lớn hơn giá hiện tại (price), thì tính toán phần trăm giảm giá và tạo badge tương ứng.
         if (product.originalPrice && product.originalPrice > product.price) {
+            // Tính phần trăm giảm giá bằng cách lấy hiệu số giữa giá gốc và giá hiện tại, chia cho giá gốc, rồi nhân với 100 và làm tròn kết quả. 
             let discountPercent = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+            // Sau đó, tạo một badge hiển thị phần trăm giảm giá này ở góc trên bên phải của ảnh sản phẩm.
             discountBadge = `<span class="badge bg-warning text-dark position-absolute" style="top: 10px; right: 20px; z-index: 10;">-${discountPercent}%</span>`;
         }
 
@@ -52,9 +71,19 @@ function renderProduct() {
         
         // Căn chỉnh vị trí nhãn Bán chạy sang bên cạnh nếu đã có nhãn Mới
         let bestSellerLeft = product.isNew ? "70px" : "20px";
+        // Nếu sản phẩm là bán chạy, tạo một badge hiển thị "BÁN CHẠY" ở góc trên bên trái của ảnh sản phẩm, căn chỉnh vị trí dựa trên việc có nhãn Mới hay không.
         const bestSellerBadge = product.isBestSeller ? `<span class="badge bg-danger position-absolute" style="top: 10px; left: ${bestSellerLeft}; z-index: 10;">BÁN CHẠY</span>` : '';
 
         // Bọc thẻ img trong div có position-relative để gắn badge nổi lên trên
+        // Ảnh sản phẩm với các badge được đặt trong một div có position-relative để đảm bảo chúng hiển thị đúng vị trí trên ảnh.
+        // Các badge (Mới, Bán chạy, Giảm giá) sẽ được hiển thị tùy theo thuộc tính của sản phẩm. 
+        // Nếu sản phẩm có thuộc tính isNew là true, sẽ hiển thị badge "MỚI". 
+        // Nếu sản phẩm có thuộc tính isBestSeller là true, sẽ hiển thị badge "BÁN CHẠY". 
+        // Nếu sản phẩm có giá gốc cao hơn giá hiện tại, sẽ hiển thị badge giảm giá với phần trăm giảm tương ứng.
+        // Các badge được xếp chồng lên nhau bằng cách sử dụng position-absolute và z-index để đảm bảo chúng hiển thị đúng vị trí trên ảnh sản phẩm.
+        // Nếu sản phẩm có giá gốc cao hơn giá hiện tại, sẽ hiển thị badge giảm giá với phần trăm giảm tương ứng.
+        // Ảnh sản phẩm được hiển thị với class "w-100" để chiếm toàn bộ chiều rộng của container, cùng với các lớp "shadow" và "rounded-3" để tạo hiệu ứng bóng và bo góc cho ảnh. 
+        // product.cover chứa đường dẫn đến ảnh sản phẩm, và alt được đặt bằng tên sản phẩm để cải thiện khả năng truy cập và SEO.
         imgContainer.innerHTML = `
         <div class="position-relative">
             ${newBadge}
@@ -68,21 +97,28 @@ function renderProduct() {
     }
 
     // 3. Render Thông tin cơ bản (Tên, Mã, Giá)
+    // Cập nhật tên sản phẩm vào phần tử h1 trong class "product-info".
     document.querySelector('.product-info h1').innerText = product.title;
+    // Cập nhật mã sản phẩm vào phần tử span có class "text-danger" trong class "product-info".
     document.querySelector('.product-info span .text-danger').innerText = product.id;
 
     // Định dạng giá tiền
     const priceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price);
+    // Khởi tạo biến priceHtml với giá đã được định dạng. 
+    // Nếu sản phẩm có giá gốc (originalPrice) và giá gốc lớn hơn giá hiện tại (price), sẽ thêm phần hiển thị giá gốc đã bị gạch ngang vào priceHtml.
     let priceHtml = `${priceFormatted}`;
     
     // Hiển thị thêm giá gốc gạch ngang nếu sản phẩm có giảm giá
     if (product.originalPrice && product.originalPrice > product.price) {
+        // Định dạng giá gốc và thêm vào priceHtml với kiểu chữ gạch ngang và màu xám nhạt để thể hiện rằng đây là giá cũ đã bị giảm. 
         const originalPriceFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.originalPrice);
+        // Giá gốc được hiển thị với class "text-muted" để có màu xám nhạt, "text-decoration-line-through" để gạch ngang, và "fs-6 ms-2" để điều chỉnh kích thước chữ và khoảng cách so với giá hiện tại.
         priceHtml += ` <span class="text-muted text-decoration-line-through fs-6 ms-2" style="font-weight: normal;">${originalPriceFormatted}</span>`;
     }
     
     // Đổ giá vào giao diện
-    const priceElement = document.querySelector('.pice-box .text-danger');
+    //
+    const priceElement = document.querySelector('.price-box .text-danger');
     if (priceElement) priceElement.innerHTML = priceHtml;
 
     // 4. Render Bảng Thông số kỹ thuật (Details & Desc)

@@ -50,7 +50,7 @@ export function addToCart(productId, event) {
 
     // Lưu lại và thông báo
     saveCartToStorage();
-    showToast();
+    showToast('success', 'Đã thêm sản phẩm vào giỏ hàng!');
     updateCartBadge();
 }
 // Đảm bảo hàm addToCart có thể được gọi từ HTML
@@ -73,7 +73,7 @@ window.updateCartBadge = function() {
 }
 
 // Hàm hiển thị thông báo góc màn hình
-function showToast() {
+function showToast(type = 'success', message = 'Thành công!') {
     let toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
         toastContainer = document.createElement('div');
@@ -82,14 +82,29 @@ function showToast() {
         document.body.appendChild(toastContainer);
     }
 
+    // Cấu hình màu sắc, icon và tiêu đề
+    let themeColor = '#24bf65'; 
+    let iconClass = 'fa-solid fa-circle-check';
+    let title = 'Thành công!';
+
+    if (type === 'warning') {
+        themeColor = '#ffc107'; 
+        iconClass = 'fa-solid fa-triangle-exclamation';
+        title = 'Chú ý!';
+    } else if (type === 'danger') {
+        themeColor = '#dc3545'; // Màu đỏ cho hành động xóa
+        iconClass = 'fa-solid fa-trash-can';
+        title = 'Đã xóa!';
+    }
+
     const toast = document.createElement('div');
     toast.className = 'custom-toast shadow'; 
     toast.innerHTML = `
-        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid #24bf65; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
-            <i class="fa-solid fa-circle-check fs-4 me-3" style="color: #24bf65;"></i>
+        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid ${themeColor}; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
+            <i class="${iconClass} fs-4 me-3" style="color: ${themeColor};"></i>
             <div>
-                <div class="text-dark fw-bold" style="font-size: 0.95rem;">Thành công!</div>
-                <div class="text-muted" style="font-size: 0.85rem;">Đã thêm sản phẩm vào giỏ hàng</div>
+                <div class="text-dark fw-bold" style="font-size: 0.95rem;">${title}</div>
+                <div class="text-muted" style="font-size: 0.85rem;">${message}</div>
             </div>
         </div>
     `;
@@ -185,7 +200,7 @@ window.changeQuantity = function(id, changeAmount) {
     }
 }
 
-// 3. Cập nhật lại hàm removeItem
+// 3. Hàm removeItem
 window.removeItem = function(id) {
     // Đã đổi === thành ==
     const index = userCart.findIndex(p => p.id == id);
@@ -193,10 +208,28 @@ window.removeItem = function(id) {
         userCart.splice(index, 1);
         saveCartToStorage();
         renderCartItems(); 
+        showToast('danger', 'Đã xóa sản phẩm khỏi giỏ hàng!');
         
         if (typeof window.updateCartBadge === 'function') {
             window.updateCartBadge();
         }
+    }
+}
+
+//Xóa tất cả sản phẩm trong giỏ hàng
+window.executeClearCart = function() {
+    userCart.length = 0; // Làm rỗng mảng
+    saveCartToStorage(); // Lưu vào localStorage
+    renderCartItems();   // Cập nhật lại giao diện
+    
+    // Cập nhật số lượng trên icon giỏ hàng
+    if (typeof window.updateCartBadge === 'function') {
+        window.updateCartBadge();
+    }
+
+    // Hiển thị thông báo Toast góc màn hình cho đẹp (nếu bạn có sẵn hàm showToast)
+    if (typeof showToast === 'function') {
+        showToast('danger', 'Đã xóa tất cả sản phẩm trong giỏ hàng!');
     }
 }
 

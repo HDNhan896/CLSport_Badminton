@@ -20,15 +20,15 @@
 
     <main class="cart-page py-5 bg-light">
         <div class="container">
-                <ul class="nav bread_crumb_list">  
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="home.html"><span>Trang chủ</span> &nbsp;
-                            &gt;</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark">Giỏ hàng</a>
-                    </li>
-                </ul>
+            <ul class="nav bread_crumb_list">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="home.html"><span>Trang chủ</span> &nbsp;
+                        &gt;</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark">Giỏ hàng</a>
+                </li>
+            </ul>
 
             <div class="cart-container shadow-sm bg-white rounded">
                 <!-- KHỐI KHI CÓ SẢN PHẨM -->
@@ -37,6 +37,10 @@
                     <div class="cart-items p-3">
                         <!-- Sản phẩm sẽ được render tự động bởi JavaScript vào đây -->
                     </div>
+                    <button class="btn btn-sm btn-outline-danger float-end text-capitalize me-2" style="font-size: 0.9rem;"
+                        onclick=" executeClearCart()">
+                        <i class="fa-solid fa-trash-can me-1"></i> Xóa tất cả
+                    </button><br>
 
                     <div id="cart-summary" class="p-3">
                         <div class="row mb-3">
