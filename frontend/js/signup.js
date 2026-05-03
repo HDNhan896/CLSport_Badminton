@@ -64,6 +64,10 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
 
    //
     if (isValid) {
-        alert("Đăng ký thành công");
+        const successModal = new bootstrap.Modal(document.getElementById('successSignupModal'));
+        successModal.show();
+        
+        // Reset form
+        document.getElementById("signupForm").reset();
     }
 });
