@@ -4,7 +4,7 @@
             <div class="col-12 col-lg-2 mb-3 mb-lg-0 text-center text-lg-start">
                 <a href="home.html">
                     <img src="https://i.postimg.cc/85b8BVH2/logo.png" alt="Logo" class="img-fluid"
-                        style="max-height: 70px;">
+                        style="max-height: 50px;">
                 </a>
             </div>
 
@@ -35,26 +35,33 @@
                     </div>
                     <span>Giỏ hàng</span>
                 </a>
+
+                <!-- Hamburger Button cho Mobile -->
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" style="border: none; box-shadow: none;">
+                    <i class="fa-solid fa-bars" style="font-size: 24px; color: var(--primary-orange);"></i>
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="menu_chinh d-none d-lg-block">
-    <div class="container">
-        <ul class="nav justify-content-between">
-            <li class="nav-item">
-                <a class="nav-link" href="home.html">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="product_list.html">Sản phẩm</i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="about.html">Giới thiệu</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.html">Liên hệ</a>
-            </li>
-        </ul>
+<div class="menu_chinh">
+    <div class="collapse d-lg-block" id="navbarMenu">
+        <div class="container">
+            <ul class="nav flex-column flex-lg-row justify-content-lg-between">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product_list.html">Sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Liên hệ</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
