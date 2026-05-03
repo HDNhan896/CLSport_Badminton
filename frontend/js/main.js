@@ -47,7 +47,7 @@ function renderProductsByCategory(categoryName) {
             const bestSellerBadge = product.isBestSeller ? `<span class="badge bg-danger position-absolute shadow-sm" style="top: 10px; left: ${bestSellerLeft}; z-index: 10;">BÁN CHẠY</span>` : '';
 
             // Định dạng giá bán
-            const priceHtml = `<div class="text-danger fw-bold fs-6">${formatPrice(product.price)}</div>`;
+            const priceHtml = `<div class="current-price text-danger fw-bold fs-6">${formatPrice(product.price)}</div>`;
 
             return `
             <div class="swiper-slide">
