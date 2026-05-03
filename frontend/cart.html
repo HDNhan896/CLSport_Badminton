@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/product.css">
     <script type="module" src="./js/cart.js" defer></script>
 </head>
 
@@ -19,12 +20,15 @@
 
     <main class="cart-page py-5 bg-light">
         <div class="container">
-            <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-dark">Trang chủ</a></li>
-                    <li class="breadcrumb-item active text-orange" aria-current="page">Giỏ hàng</li>
-                </ol>
-            </nav>
+                <ul class="nav bread_crumb_list">  
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="home.html"><span>Trang chủ</span> &nbsp;
+                            &gt;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark">Giỏ hàng</a>
+                    </li>
+                </ul>
 
             <div class="cart-container shadow-sm bg-white rounded">
                 <!-- KHỐI KHI CÓ SẢN PHẨM -->
