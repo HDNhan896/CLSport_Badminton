@@ -57,11 +57,18 @@ export function addToCart(productId, event) {
 window.addToCart = addToCart;
 
 // Hàm đếm số lượng để hiển thị icon
-function updateCartBadge() {
+window.updateCartBadge = function() {
     const badge = document.querySelector('.cart-badge');
+    
     if (badge) {
-        const totalItems = userCart.reduce((sum, item) => sum + item.quantity, 0);
+        // Lấy dữ liệu mới nhất từ localStorage để đảm bảo tính đồng bộ
+        let currentCart = JSON.parse(localStorage.getItem('userCart')) || [];
+        const totalItems = currentCart.reduce((sum, item) => sum + item.quantity, 0);
         badge.innerText = totalItems;
+    } else {
+        // Nếu chưa tìm thấy thẻ .cart-badge (do layout.js chưa load xong header), 
+        // chờ 100ms rồi thực hiện kiểm tra lại.
+        setTimeout(window.updateCartBadge, 100);
     }
 }
 
@@ -78,8 +85,8 @@ function showToast() {
     const toast = document.createElement('div');
     toast.className = 'custom-toast shadow'; 
     toast.innerHTML = `
-        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid #d95327; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
-            <i class="fa-solid fa-circle-check fs-4 me-3" style="color: #d95327;"></i>
+        <div class="d-flex align-items-center" style="background-color: #ffffff; border-left: 5px solid #24bf65; padding: 15px 20px; border-radius: 6px; min-width: 280px;">
+            <i class="fa-solid fa-circle-check fs-4 me-3" style="color: #24bf65;"></i>
             <div>
                 <div class="text-dark fw-bold" style="font-size: 0.95rem;">Thành công!</div>
                 <div class="text-muted" style="font-size: 0.85rem;">Đã thêm sản phẩm vào giỏ hàng</div>

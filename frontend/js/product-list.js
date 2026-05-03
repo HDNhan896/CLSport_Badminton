@@ -1,8 +1,9 @@
 import { PRODUCTS } from './badmintonProducts.js';
 
 const formatPrice = (price) => price.toLocaleString('vi-VN') + ' đ';
-
+// ==========================================
 // 1. RENDER BAN ĐẦU
+// ==========================================
 function renderAllProducts() {
     const container = document.getElementById("sanPham");
     if (!container) return;
@@ -61,7 +62,7 @@ function renderAllProducts() {
     container.innerHTML = htmlRender;
 }
 
-// ==========================================
+
 // HÀM TRỢ GIÚP: RESET ANIMATION CHO CÁC PHẦN TỬ ĐANG HIỂN THỊ
 // ==========================================
 function reAnimateVisibleProducts() {
@@ -83,13 +84,65 @@ function reAnimateVisibleProducts() {
 // ==========================================
 // 2. CÁC HÀM SẮP XẾP VÀ LỌC
 // ==========================================
-
-// Hàm phụ trợ để đổi tên nút Dropdown
+// Hàm phụ trợ đổi tên nút
 function updateDropdownTitle(text) {
-    const btn = document.getElementById('sortDropdownBtn');
+    const btn = document.querySelector('.dropdown-toggle');
     if (btn) btn.innerText = text;
 }
 
+// -----------------------------------------------------------
+// HÀM LỌC TỔNG HỢP: Kiểm tra CÙNG LÚC Danh mục, Giá và Hàng mới
+// -----------------------------------------------------------
+function apDungCacBoLoc() {
+    const productCols = document.querySelectorAll('.product-col');
+    
+    // Lấy danh sách các checkbox đang được đánh dấu
+    const checkedCategories = Array.from(document.querySelectorAll('input[id^="category"]:checked')).map(box => box.value);
+    const checkedPrices = Array.from(document.querySelectorAll('input[id^="price"]:checked')).map(box => box.value);
+
+    // Kiểm tra xem nút Dropdown có đang ở chế độ "Hàng mới nhất" không
+    const sortBtn = document.querySelector('.dropdown-toggle'); // Bắt bằng class thay vì ID
+    const isShowingNewestOnly = sortBtn && sortBtn.innerText.includes("Hàng mới nhất");
+
+    productCols.forEach(col => {
+        let price = parseInt(col.getAttribute('data-price'));
+        let category = col.id;
+        
+        // 1. Kiểm tra sản phẩm có thuộc danh mục đang chọn không
+        let matchCategory = checkedCategories.length === 0 || checkedCategories.includes(category);
+        
+        // 2. Kiểm tra sản phẩm có nằm trong mức giá đang chọn không
+        let matchPrice = checkedPrices.length === 0;
+        if (!matchPrice) {
+            checkedPrices.forEach(range => {
+                let parts = range.split('-'); 
+                let min = parseInt(parts[0]);
+                let max = parts[1] === 'max' ? Infinity : parseInt(parts[1]);
+                if (price >= min && price <= max) matchPrice = true; 
+            });
+        }
+
+        // 3. Kiểm tra sản phẩm có phải là hàng mới không (Nếu đang chọn chế độ "Hàng mới nhất")
+        let matchNewest = true;
+        if (isShowingNewestOnly) {
+            const isNew = col.querySelector('.badge.bg-success'); 
+            if (!isNew) matchNewest = false; // Nếu không có badge bg-success thì đánh dấu là false
+        }
+
+        // 4. Quyết định hiển thị: Khớp TẤT CẢ điều kiện đang được áp dụng thì mới hiện
+        if (matchCategory && matchPrice && matchNewest) {
+            col.style.display = 'block';
+        } else {
+            col.style.display = 'none';
+        }
+    });
+
+    reAnimateVisibleProducts();
+}
+
+// -----------------------------------------------------------
+// CÁC HÀM SẮP XẾP VÀ LỌC KHI KÍCH HOẠT
+// -----------------------------------------------------------
 window.giaTangDan = function(event) {
     if (event) event.preventDefault();
     updateDropdownTitle("Giá tăng dần");
@@ -97,15 +150,12 @@ window.giaTangDan = function(event) {
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    // BƯỚC ĐÃ SỬA: Hiển thị lại toàn bộ sản phẩm trước khi sắp xếp
-    productCols.forEach(col => col.style.display = 'block');
-
+    // Sắp xếp thứ tự trong DOM
     productCols.sort((a, b) => parseInt(a.getAttribute('data-price')) - parseInt(b.getAttribute('data-price')));
-    
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
-    
-    reAnimateVisibleProducts(); 
+    // Gọi lọc để ẩn đi những sản phẩm không đúng checkbox
+    apDungCacBoLoc(); 
 }
 
 window.giaGiamDan = function(event) {
@@ -115,85 +165,61 @@ window.giaGiamDan = function(event) {
     const container = document.getElementById("sanPham"); 
     const productCols = Array.from(container.querySelectorAll('.product-col'));
 
-    // BƯỚC ĐÃ SỬA: Hiển thị lại toàn bộ sản phẩm trước khi sắp xếp
-    productCols.forEach(col => col.style.display = 'block');
-
+    // Sắp xếp thứ tự trong DOM
     productCols.sort((a, b) => parseInt(b.getAttribute('data-price')) - parseInt(a.getAttribute('data-price')));
-    
     container.innerHTML = ''; 
     productCols.forEach(col => container.appendChild(col));
-
-    reAnimateVisibleProducts(); 
+    // Gọi lọc để ẩn đi những sản phẩm không đúng checkbox
+    apDungCacBoLoc(); 
 }
 
 window.hangMoiNhat = function(event) {
     if (event) event.preventDefault();
     updateDropdownTitle("Hàng mới nhất"); 
-
-    const productCols = Array.from(document.querySelectorAll('.product-col'));
-    
-    productCols.forEach(col => {
-        const isNew = col.querySelector('.badge.bg-success'); 
-        col.style.display = isNew ? 'block' : 'none';
-    });
-
-    reAnimateVisibleProducts(); 
+    // Khi chọn Hàng mới nhất, chỉ cần gọi hàm tổng hợp là nó tự quét và lọc
+    apDungCacBoLoc(); 
 }
 
 window.locTheoGia = function() {
-    const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
-    const productCols = document.querySelectorAll('.product-col');
-
-    const priceRanges = Array.from(checkedBoxes)
-        .map(box => box.value)
-        .filter(val => val.includes('-'));
-
-    productCols.forEach(col => {
-        let price = parseInt(col.getAttribute('data-price'));
-        let isMatch = false;
-
-        if (priceRanges.length === 0) {
-            col.style.display = 'block'; 
-        } else {
-            priceRanges.forEach(range => {
-                let rangeParts = range.split('-'); 
-                let min = parseInt(rangeParts[0]);
-                let max = rangeParts[1] === 'max' ? Infinity : parseInt(rangeParts[1]);
-
-                if (price >= min && price <= max) isMatch = true; 
-            });
-            col.style.display = isMatch ? 'block' : 'none';
-        }
-    });
-
-    reAnimateVisibleProducts();
+    // Không đổi lại tên nút "Sắp xếp" nữa để giữ nguyên trạng thái nếu người dùng đang coi "Hàng mới nhất"
+    apDungCacBoLoc();
 }
 
 window.locTheoDanhMuc = function() {
-    const checkedBoxes = document.querySelectorAll('.form-check-input:checked');
-    const productCols = document.querySelectorAll('.product-col');
-    
-    const selectedCategories = Array.from(checkedBoxes)
-        .map(box => box.value)
-        .filter(val => !val.includes('-0') && !val.includes('0-')); 
-
-    productCols.forEach(col => {
-        const category = col.id;
-        
-        if (selectedCategories.length === 0) {
-             col.style.display = 'block';
-        } else {
-             col.style.display = selectedCategories.includes(category) ? 'block' : 'none';
-        }
-    });
-
-    reAnimateVisibleProducts(); 
+    // Không đổi lại tên nút "Sắp xếp" nữa
+    apDungCacBoLoc();
 }
 
+// ==========================================
 // 3. KHỞI CHẠY KHI TRANG LOAD
+// ==========================================
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Render tất cả sản phẩm ra UI trước
     renderAllProducts();
 
+    // 2. Setup offcanvas menu (Giữ nguyên của bạn)
     const menuContent = document.getElementById('Loc').innerHTML;
     document.getElementById('Loc-offcanva').innerHTML = menuContent;    
+
+    // 3. TỰ ĐỘNG CHỌN CHECKBOX TỪ URL (CHỨC NĂNG MỚI)
+    // Lấy tham số 'category' từ thanh địa chỉ trình duyệt
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromURL = urlParams.get('category');
+
+    if (categoryFromURL) {
+        // Tìm ô checkbox có value trùng với category truyền qua
+        // Tìm trong cả menu trên PC (id="Loc") và Mobile (id="Loc-offcanva")
+        const targetCheckboxes = document.querySelectorAll(`input[value="${categoryFromURL}"]`);
+        
+        if (targetCheckboxes.length > 0) {
+            targetCheckboxes.forEach(checkbox => {
+                checkbox.checked = true; // Đánh dấu tick vào ô đó
+            });
+            
+            // Tự động gọi hàm lọc danh mục để ẩn các sản phẩm không liên quan
+            if (typeof window.locTheoDanhMuc === "function") {
+                window.locTheoDanhMuc(); 
+            }
+        }
+    }
 });
