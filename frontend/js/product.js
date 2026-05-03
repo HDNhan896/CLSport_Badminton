@@ -121,7 +121,6 @@ function renderProduct() {
     const priceElement = document.querySelector('.price-box .text-danger');
     if (priceElement) priceElement.innerHTML = priceHtml;
 
-    // 4. Render Bảng Thông số kỹ thuật (Details & Desc)
     // 4. Render Bảng Thông số kỹ thuật (Details) & Mô tả (Desc)
     const detailTable = document.querySelector('#details table');
     const descContainer = document.getElementById('desc'); // Lấy trực tiếp id="desc" thay vì "#desc table"
